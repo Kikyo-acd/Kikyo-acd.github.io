@@ -110,6 +110,46 @@
       box-shadow: 0 8px 32px rgba(80,100,180,0.10), 0 1.5px 0 rgba(255,255,255,0.7) inset;
     }
 
+/* ===================== TOP BAR (NEW) ===================== */
+    .top-bar {
+      position: absolute;
+      top: 24px; left: 24px; right: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 10;
+      animation: fadeDown 0.6s ease;
+    }
+    .welcome-msg {
+      font-size: 0.88rem; color: var(--text);
+      background: var(--glass-strong);
+      padding: 8px 18px; border-radius: 100px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 12px rgba(80,100,180,0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all var(--transition);
+    }
+    .interactive-btn {
+      font-size: 0.88rem; color: var(--accent1);
+      background: var(--glass-strong);
+      padding: 8px 18px; border-radius: 100px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 12px rgba(80,100,180,0.08);
+      cursor: pointer; font-weight: 600;
+      transition: all var(--transition);
+    }
+    .interactive-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(59,130,246,0.2);
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    
+    @media (max-width: 580px) {
+      .top-bar { flex-direction: column; gap: 10px; top: 16px; }
+    }
+
     /* ===================== HERO ===================== */
     .hero {
       min-height: 100vh;
@@ -397,8 +437,21 @@
 <div class="page">
 
   <!-- ==================== HERO ==================== -->
-  <section id="hero" class="hero">
-    <div class="avatar-ring"><span class="initials">黄</span></div>
+ <section id="hero" class="hero">
+    <div class="top-bar">
+      <div class="welcome-msg" id="welcomeMsg">✨ 欢迎来到我的个人网页，希望能与您多多交流！</div>
+      <button class="interactive-btn" onclick="pokeMe()">戳我一下 👆</button>
+    </div>
+    
+<div class="avatar-ring" style="overflow: hidden; padding: 0;">
+      <img 
+        src="avatar.png" 
+        alt="黄安东" 
+        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"
+        onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=Huang&backgroundColor=60a5fa&textColor=ffffff';" 
+      />
+    </div>
+
     <h1 class="hero-name">黄安东</h1>
     <p class="hero-sub">临床医学 · 麻醉学方向 · 科研型医学生</p>
     <p class="hero-desc">广州医科大学 第二临床学院 &nbsp;|&nbsp; 绩点排名 3/67 &nbsp;|&nbsp; 综合测评 2/67</p>
@@ -475,9 +528,17 @@
     <span class="sec-tag">Education</span>
     <h2 class="sec-title">教育背景</h2>
 
-    <div class="card">
+<div class="card">
       <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
+      <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
+      
+      <img 
+        src="comp_tiaozhanbei.png" 
+        alt="挑战杯" 
+        style="width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.05);"
+        onerror="this.onerror=null; this.src='https://via.placeholder.com/600x140/fef3c7/d97706?text=Image+Not+Found';" 
+      />
+
       <div class="flex-head">
         <div>
           <div class="card-title">广州医科大学 · 第二临床学院</div>
@@ -548,7 +609,7 @@
             </div>
             <span class="badge b-indigo">已完成</span>
           </div>
-          <p class="card-body">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、���物模型等多项实验工作，并以第二作者身份参与发表 Advanced Science 论文。</p>
+          <p class="card-body">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、   物模型等多项实验工作，并以第二作者身份参与发表 Advanced Science 论文。</p>
         </div>
       </div>
 
@@ -641,7 +702,7 @@
             <span class="badge b-violet">核心成员</span>
             <span class="badge b-green">已发表</span>
           </div>
-          <p class="card-body">揭示超级增强子驱动 SOX4/SMAD3 正反馈环路，共同激活 AXL/LPCAT1 轴增强 AKT/ERK/STAT5 信号，��速慢粒白血病向急变期进展；证实 Bemcentinib 靶向 AXL 可显著抑制 CML-BP，提供新治疗策略。</p>
+          <p class="card-body">揭示超级增强子驱动 SOX4/SMAD3 正反馈环路，共同激活 AXL/LPCAT1 轴增强 AKT/ERK/STAT5 信号，  速慢粒白血病向急变期进展；证实 Bemcentinib 靶向 AXL 可显著抑制 CML-BP，提供新治疗策略。</p>
           <div class="card-contrib">个人贡献：Western Blot、数据分析及可视化</div>
         </div>
       </div>
@@ -657,7 +718,7 @@
           <div class="card-title" style="line-height:1.5">Nationwide Causal Effects of PM2.5 Component Mixture on Ischemic Heart Disease Mortality in the United States, 2000–2019</div>
           <div class="badge-row">
             <span class="badge b-blue">Ecotoxicology and Environmental Safety</span>
-            <span class="badge b-gold">中���院小类一区 · IF 6.1</span>
+            <span class="badge b-gold">中   院小类一区 · IF 6.1</span>
             <span class="badge b-green">第一作者</span>
             <span class="badge b-rose">Under Revision</span>
           </div>
@@ -981,6 +1042,34 @@
     document.getElementById('hero').style.display = '';
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+// 新增：互动功能
+  const greetings = [
+    "科研顺利，早日发 Nature / Science！", 
+    "今天也要元气满满哦！", 
+    "欢迎随时通过邮件与我联系交流！",
+    "✨ 欢迎来到我的个人网页，希望能与您多多交流！",
+    "别老按了！",
+    "再按就重复了！",
+    "真别按了！",
+    "算了你按吧！",
+    "希望你我前程似锦！",
+    "我想不出词了求你别按了",
+    "算了真最后一个了，要重复了哦"
+  ];
+  function pokeMe() {
+    const msg = document.getElementById('welcomeMsg');
+    // 随机选取一句不同的问候语
+    let randomGreeting;
+    do {
+      randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+    } while (msg.innerText === randomGreeting);
+    
+    msg.style.opacity = 0; // 简单的淡入淡出动画
+    setTimeout(() => {
+      msg.innerText = randomGreeting;
+      msg.style.opacity = 1;
+    }, 200);
   }
 </script>
 </body>
