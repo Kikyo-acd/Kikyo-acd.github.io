@@ -1,1068 +1,958 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>眼科疾病风险预测工具</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-            margin-bottom: 25px;
-        }
-        .form-container {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-            margin-bottom: 30px;
-        }
-        .results-container {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-        }
-        .form-label {
-            font-weight: 600;
-            color: #333;
-        }
-        .form-text {
-            color: #6c757d;
-        }
-        .btn-primary {
-            background-color: #1890ff;
-            border-color: #1890ff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #096dd9;
-            border-color: #096dd9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(24, 144, 255, 0.3);
-        }
-        .chart-container {
-            position: relative;
-            height: 400px;
-            width: 100%;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #6c757d;
-        }
-        .risk-level {
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        .risk-low {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        .risk-medium {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        .risk-high {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        .info-card {
-            background-color: #e9f5fe;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .form-range {
-            cursor: pointer;
-        }
-        .form-range::-webkit-slider-thumb {
-            background: #1890ff;
-        }
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255,255,255,0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-        }
-        .factor-item {
-            border-left: 4px solid #1890ff;
-            padding: 8px 15px;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-            border-radius: 0 4px 4px 0;
-        }
-        .factor-title {
-            font-weight: 600;
-            color: #333;
-        }
-        .factor-value {
-            color: #1890ff;
-            font-weight: 600;
-        }
-        .section-title {
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
-            margin-top: 20px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .lifestyle-score-badge {
-            font-size: 14px;
-            margin-left: 10px;
-            padding: 3px 8px;
-            border-radius: 20px;
-        }
-        .lifestyle-unhealthy {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        .lifestyle-intermediate {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        .lifestyle-healthy {
-            background-color: #d4edda;
-            color: #155724;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>黄安东 — 个人简历</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0b0f1a;
+      --surface:     #111827;
+      --surface2:    #1a2235;
+      --border:      rgba(255,255,255,0.07);
+      --text:        #e2e8f0;
+      --muted:       #8892a4;
+      --accent1:     #60a5fa;   /* blue */
+      --accent2:     #818cf8;   /* indigo */
+      --accent3:     #a78bfa;   /* violet */
+      --gold:        #f0c060;
+      --glow1:       rgba(96,165,250,0.15);
+      --glow2:       rgba(129,140,248,0.12);
+      --radius:      14px;
+      --transition:  0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== AMBIENT BACKGROUND GLOWS ===== */
+    .ambient {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .ambient span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.45;
+    }
+    .ambient .g1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #1e3a8a, transparent 70%);
+      top: -180px; left: -150px;
+    }
+    .ambient .g2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #312e81, transparent 70%);
+      top: 30%; right: -160px;
+    }
+    .ambient .g3 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #1e1b4b, transparent 70%);
+      bottom: -100px; left: 30%;
+    }
+
+    /* ===== LAYOUT ===== */
+    .page { position: relative; z-index: 1; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .avatar-ring {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent1), var(--accent3));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 0 40px rgba(96,165,250,0.35), 0 0 80px rgba(129,140,248,0.2);
+    }
+    .avatar-ring .initials {
+      font-size: 32px; font-weight: 700; color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .hero-name {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: linear-gradient(120deg, #93c5fd, #818cf8, #c4b5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-size: 1rem; color: var(--muted); margin-bottom: 6px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .hero-desc {
+      font-size: 0.95rem; color: var(--muted); max-width: 540px;
+      margin: 0 auto 20px;
+    }
+    .contact-row {
+      display: flex; gap: 20px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 48px;
+    }
+    .contact-row a {
+      color: var(--accent1); text-decoration: none;
+      font-size: 0.88rem; letter-spacing: 0.04em;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .contact-row a:hover { border-color: var(--accent1); }
+
+    /* ===== NAV CARDS ===== */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      max-width: 820px;
+      width: 100%;
+      padding: 0 16px;
+    }
+    .nav-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .nav-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(96,165,250,0.08), transparent 70%);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .nav-card:hover::before { opacity: 1; }
+    .nav-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(96,165,250,0.15);
+      border-color: rgba(96,165,250,0.3);
+    }
+    .nav-icon {
+      font-size: 1.5rem; margin-bottom: 10px;
+      display: block;
+    }
+    .nav-label {
+      font-weight: 600; font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .nav-hint {
+      font-size: 0.78rem; color: var(--muted);
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      display: none;
+      min-height: 100vh;
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeSlide 0.45s ease both;
+    }
+    .section.active { display: block; }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Back button */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent1); font-size: 0.88rem; cursor: pointer;
+      background: none; border: none; padding: 0;
+      margin-bottom: 40px; letter-spacing: 0.04em;
+      text-transform: uppercase; transition: opacity var(--transition);
+    }
+    .back-btn:hover { opacity: 0.7; }
+    .back-btn svg { width: 16px; height: 16px; }
+
+    /* Section header */
+    .sec-header {
+      margin-bottom: 48px;
+    }
+    .sec-tag {
+      display: inline-block;
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--accent1); background: rgba(96,165,250,0.1);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: 100px; padding: 3px 12px; margin-bottom: 14px;
+    }
+    .sec-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700; line-height: 1.25;
+      background: linear-gradient(120deg, var(--text), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      margin-bottom: 20px;
+      position: relative; overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .card:hover {
+      border-color: rgba(96,165,250,0.2);
+      box-shadow: 0 8px 32px rgba(96,165,250,0.06);
+    }
+    .card-accent {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent1), var(--accent3));
+      border-radius: 4px 0 0 4px;
+    }
+
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .card-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+    .card-meta { font-size: 0.82rem; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem; letter-spacing: 0.06em;
+      padding: 3px 10px; border-radius: 100px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-blue  { background: rgba(96,165,250,0.12); color: var(--accent1); border: 1px solid rgba(96,165,250,0.25); }
+    .badge-violet{ background: rgba(167,139,250,0.12); color: var(--accent3); border: 1px solid rgba(167,139,250,0.25); }
+    .badge-gold  { background: rgba(240,192,96,0.1);  color: var(--gold);    border: 1px solid rgba(240,192,96,0.2); }
+    .badge-green { background: rgba(52,211,153,0.1);  color: #34d399;        border: 1px solid rgba(52,211,153,0.2); }
+    .badge-rose  { background: rgba(251,113,133,0.1); color: #fb7185;        border: 1px solid rgba(251,113,133,0.2); }
+
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    .body-text { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-top: 12px; }
+
+    /* ===== EDU STATS ===== */
+    .stat-row {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;
+    }
+    .stat-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      text-align: center; flex: 1; min-width: 90px;
+    }
+    .stat-val {
+      font-size: 1.2rem; font-weight: 700;
+      background: linear-gradient(120deg, var(--accent1), var(--accent3));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    /* ===== SKILLS ===== */
+    .skill-group { margin-bottom: 28px; }
+    .skill-group-title {
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent2); margin-bottom: 12px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      font-size: 0.82rem; padding: 5px 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text);
+      transition: border-color var(--transition);
+    }
+    .skill-tag:hover { border-color: rgba(96,165,250,0.35); color: var(--accent1); }
+
+    /* ===== AWARDS ===== */
+    .award-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid var(--border);
+    }
+    .award-row:last-child { border-bottom: none; }
+    .award-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent1), var(--accent3));
+      box-shadow: 0 0 8px rgba(96,165,250,0.5);
+    }
+    .award-text { flex: 1; font-size: 0.92rem; }
+    .award-year { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+    /* ===== PUBLICATIONS LIST ===== */
+    .pub-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent1), var(--accent3));
+      color: #fff; font-size: 0.72rem; font-weight: 700;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .pub-entry {
+      display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 2px; background: linear-gradient(to bottom, var(--accent1), transparent);
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-dot {
+      position: absolute; left: -25px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent1);
+      box-shadow: 0 0 10px rgba(96,165,250,0.5);
+    }
+    .tl-date { font-size: 0.78rem; color: var(--accent1); margin-bottom: 4px; letter-spacing: 0.04em; }
+    .tl-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .tl-body  { font-size: 0.86rem; color: var(--muted); }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .card { padding: 20px 18px; }
+      .nav-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>眼科疾病风险预测工具</h1>
-            <p class="lead">基于英国生物银行数据训练的DeepSurv深度学习模型</p>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-container">
-                    <h3 class="mb-4">个人信息输入</h3>
-                    <div class="info-card mb-4">
-                        <p class="mb-0"><strong>使用说明：</strong>该工具基于主要预测因素进行眼科疾病风险评估。每次修改输入后，系统会自动进行风险预测并生成图表。</p>
-                    </div>
-                    
-                    <form id="riskForm">
-                        <!-- 遗传风险部分 -->
-                        <h5 class="section-title">遗传风险信息</h5>
-                        
-                        <!-- 1. PRS_STANDARDIZED_COMBINED -->
-                        <div class="mb-3">
-                            <label for="prs_score" class="form-label">标准化遗传风险评分 (PRS)</label>
-                            <input type="range" class="form-range" id="prs_score" min="-3" max="3" step="0.1" value="0">
-                            <div class="d-flex justify-content-between">
-                                <small>-3 (低)</small>
-                                <small id="prs_score_value">0</small>
-                                <small>3 (高)</small>
-                            </div>
-                            <div class="form-text">遗传风险评分，数值越高表示遗传风险越高</div>
-                        </div>
-                        
-                        <!-- 2. 3. PRS类别（中等/高风险） -->
-                        <div class="mb-3">
-                            <label class="form-label">遗传风险类别</label>
-                            <select class="form-select" id="prs_category">
-                                <option value="low">低风险</option>
-                                <option value="medium" selected>中等风险</option>
-                                <option value="high">高风险</option>
-                            </select>
-                            <div class="form-text">基于遗传评分的风险分类</div>
-                        </div>
-                        
-                        <!-- 生活方式因素部分 -->
-                        <h5 class="section-title">生活方式因素 
-                            <span id="lifestyle_category_badge" class="badge lifestyle-score-badge lifestyle-intermediate">中等</span>
-                        </h5>
-                        
-                        <!-- 饮食因素 -->
-                        <div class="mb-3">
-                            <label class="form-label">健康饮食习惯</label>
-                            <select class="form-select" id="diet_score">
-                                <option value="0">不健康 (少于4项健康标准)</option>
-                                <option value="1" selected>健康 (4项或更多健康标准)</option>
-                            </select>
-                            <div class="form-text">健康标准包括：足够水果蔬菜、全谷物、鱼类，少加工肉类等</div>
-                        </div>
-                        
-                        <!-- 吸烟状态 -->
-                        <div class="mb-3">
-                            <label class="form-label">吸烟状态</label>
-                            <select class="form-select" id="smoking_score">
-                                <option value="0">现在或曾经吸烟</option>
-                                <option value="1" selected>从不吸烟</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 酒精摄入 -->
-                        <div class="mb-3">
-                            <label class="form-label">酒精摄入</label>
-                            <select class="form-select" id="alcohol_score">
-                                <option value="0">高风险摄入 (女性≥14g/天, 男性≥28g/天)</option>
-                                <option value="1" selected>低风险摄入 (女性<14g/天, 男性<28g/天)</option>
-                            </select>
-                            <div class="form-text">1标准杯≈12克酒精</div>
-                        </div>
-                        
-                        <!-- 身体活动与久坐 -->
-                        <div class="mb-3">
-                            <label class="form-label">身体活动与久坐行为</label>
-                            <select class="form-select" id="physical_activity_score">
-                                <option value="0">活动不足或久坐时间过长</option>
-                                <option value="1" selected>活动充分 (>3000 MET-分钟/周) 且久坐时间短 (≤2小时/天)</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 睡眠时间 -->
-                        <div class="mb-3">
-                            <label class="form-label">睡眠时间</label>
-                            <select class="form-select" id="sleep_score">
-                                <option value="0">不足或过多 (<6小时或>8小时)</option>
-                                <option value="1" selected>充足 (6-8小时/天)</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 生活方式总分 -->
-                        <div class="mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-title">生活方式评分</h6>
-                                    <p id="lifestyle_score_text" class="mb-1">总分: <span>5</span>/5</p>
-                                    <div class="progress">
-                                        <div id="lifestyle_score_bar" class="progress-bar bg-success" role="progressbar" style="width: 100%" 
-                                             aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 其他健康指标 -->
-                        <h5 class="section-title">其他健康指标</h5>
-                        
-                        <!-- 5. townsendindex -->
-                        <div class="mb-3">
-                            <label for="townsend" class="form-label">Townsend贫困指数</label>
-                            <input type="range" class="form-range" id="townsend" min="-8" max="8" step="0.5" value="0">
-                            <div class="d-flex justify-content-between">
-                                <small>-8 (富裕)</small>
-                                <small id="townsend_value">0</small>
-                                <small>8 (贫困)</small>
-                            </div>
-                            <div class="form-text">衡量社会经济状况的指标</div>
-                        </div>
-                        
-                        <!-- 6. crf_d_yes -->
-                        <div class="mb-3">
-                            <label class="form-label">慢性肾病</label>
-                            <select class="form-select" id="crf_d">
-                                <option value="no" selected>否</option>
-                                <option value="yes">是</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 7. edu_unknown & 10. edu_uncollege -->
-                        <div class="mb-3">
-                            <label class="form-label">教育水平</label>
-                            <select class="form-select" id="education">
-                                <option value="college">大学及以上</option>
-                                <option value="uncollege" selected>大学以下</option>
-                                <option value="unknown">未知</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 8. bmi_group.0.0_1 -->
-                        <div class="mb-3">
-                            <label class="form-label">BMI分组</label>
-                            <select class="form-select" id="bmi_group">
-                                <option value="0">正常（BMI < 25）</option>
-                                <option value="1" selected>超重（BMI 25-30）</option>
-                                <option value="2">肥胖（BMI > 30）</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 9. hypertension_yes -->
-                        <div class="mb-3">
-                            <label class="form-label">高血压</label>
-                            <select class="form-select" id="hypertension">
-                                <option value="no" selected>否</option>
-                                <option value="yes">是</option>
-                            </select>
-                        </div>
-                        
-                        <!-- 基本信息 -->
-                        <h5 class="section-title">基本信息</h5>
-                        
-                        <div class="mb-3">
-                            <label for="age" class="form-label">年龄</label>
-                            <input type="number" class="form-control" id="age" min="40" max="90" value="55">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">性别</label>
-                            <select class="form-select" id="sex">
-                                <option value="female" selected>女</option>
-                                <option value="male">男</option>
-                            </select>
-                        </div>
-                        
-                        <button type="button" class="btn btn-primary w-100 mt-4" id="predictButton">更新预测结果</button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="col-md-7">
-                <div class="results-container">
-                    <h3 class="mb-4">风险预测结果</h3>
-                    
-                    <div id="summaryResults" class="mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">总体风险评估</h5>
-                                <p id="risk5year" class="mb-1">第5年累积风险: <span>待计算</span></p>
-                                <p id="risk10year" class="mb-1">第10年累积风险: <span>待计算</span></p>
-                                <div id="riskLevel" class="risk-level risk-medium">中等风险</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h4>未来10年风险预测</h4>
-                    <p class="text-muted mb-4">基于5次模拟预测的风险区间</p>
-                    <div class="chart-container mb-4">
-                        <canvas id="riskChart"></canvas>
-                    </div>
-                    
-                    <h4>个性化风险解读</h4>
-                    <div id="factorAnalysis" class="mt-3 mb-4">
-                        <div class="d-flex align-items-center justify-content-center p-5">
-                            <p class="text-muted mb-0">请输入或调整左侧个人信息以获取风险解读</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">预防建议</h5>
-                            <ul>
-                                <li>定期进行眼科检查，特别是高风险人群（50岁以上或有家族史）</li>
-                                <li>保持健康生活方式，包括均衡饮食、规律运动</li>
-                                <li>控制慢性疾病，如高血压、糖尿病</li>
-                                <li>避免长时间用眼疲劳，定时休息</li>
-                                <li>佩戴防蓝光眼镜，减少电子屏幕对眼睛的伤害</li>
-                                <li>戒烟限酒，这些习惯会增加眼科疾病风险</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>© 2025 眼科疾病预测研究团队 | 基于英国生物银行数据和DeepSurv深度学习模型</p>
-            <p class="text-muted small">数据更新日期: 2025-04-17</p>
-        </div>
+
+<!-- AMBIENT LIGHT -->
+<div class="ambient">
+  <span class="g1"></span>
+  <span class="g2"></span>
+  <span class="g3"></span>
+</div>
+
+<div class="page">
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero" class="hero">
+    <div class="avatar-ring"><span class="initials">黄</span></div>
+    <h1 class="hero-name">黄安东</h1>
+    <p class="hero-sub">临床医学 · 麻醉学方向 · 科研型医学生</p>
+    <p class="hero-desc">广州医科大学 第二临床学院 | 绩点排名 3/67 | 综合测评 2/67</p>
+    <div class="contact-row">
+      <a href="tel:+8615918400341">(+86) 159-1840-0341</a>
+      <a href="mailto:had785387047@gmail.com">had785387047@Gmail.com</a>
     </div>
-    
-    <!-- 加载状态指示器 -->
-    <div class="loading" style="display: none;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">加载中...</span>
-        </div>
+    <nav class="nav-grid">
+      <a class="nav-card" href="#" onclick="showSection('edu')">
+        <span class="nav-icon">▤</span>
+        <div class="nav-label">教育背景</div>
+        <div class="nav-hint">学业成绩 · 核心课程</div>
+      </a>
+      <a class="nav-card" href="#" onclick="showSection('research')">
+        <span class="nav-icon">◈</span>
+        <div class="nav-label">科研经历</div>
+        <div class="nav-hint">课题组 · 项目立项</div>
+      </a>
+      <a class="nav-card" href="#" onclick="showSection('pub')">
+        <span class="nav-icon">◎</span>
+        <div class="nav-label">科研成果</div>
+        <div class="nav-hint">SCI 论文 · 期刊</div>
+      </a>
+      <a class="nav-card" href="#" onclick="showSection('comp')">
+        <span class="nav-icon">◇</span>
+        <div class="nav-label">学科竞赛</div>
+        <div class="nav-hint">国家级 · 省级奖项</div>
+      </a>
+      <a class="nav-card" href="#" onclick="showSection('award')">
+        <span class="nav-icon">◆</span>
+        <div class="nav-label">荣誉奖项</div>
+        <div class="nav-hint">国奖 · 优秀学生</div>
+      </a>
+      <a class="nav-card" href="#" onclick="showSection('skill')">
+        <span class="nav-icon">◉</span>
+        <div class="nav-label">技能专长</div>
+        <div class="nav-hint">实验 · 编程 · 临床</div>
+      </a>
+    </nav>
+  </section>
+
+  <!-- ==================== EDUCATION ==================== -->
+  <section id="edu" class="section">
+    <button class="back-btn" onclick="showHero()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回主页
+    </button>
+    <div class="sec-header">
+      <span class="sec-tag">Education</span>
+      <h2 class="sec-title">教育背景</h2>
     </div>
 
-    <script>
-        // 初始化变量
-        let riskChart = null;
-        let lastPredictions = [];
-        
-        // 监听页面加载
-        document.addEventListener('DOMContentLoaded', function() {
-            // 初始化范围滑块显示值
-            document.getElementById('prs_score_value').textContent = document.getElementById('prs_score').value;
-            document.getElementById('townsend_value').textContent = document.getElementById('townsend').value;
-            
-            // 监听范围滑块变化
-            document.getElementById('prs_score').addEventListener('input', function() {
-                document.getElementById('prs_score_value').textContent = this.value;
-                updatePredictions();
-            });
-            
-            document.getElementById('townsend').addEventListener('input', function() {
-                document.getElementById('townsend_value').textContent = this.value;
-                updatePredictions();
-            });
-            
-            // 监听生活方式因素变化
-            document.querySelectorAll('#diet_score, #smoking_score, #alcohol_score, #physical_activity_score, #sleep_score')
-            .forEach(element => {
-                element.addEventListener('change', function() {
-                    updateLifestyleScore();
-                    updatePredictions();
-                });
-            });
-            
-            // 监听其他输入变化
-            document.querySelectorAll('select, input[type="number"]').forEach(input => {
-                input.addEventListener('change', updatePredictions);
-            });
-            
-            // 预测按钮点击事件
-            document.getElementById('predictButton').addEventListener('click', updatePredictions);
-            
-            // 初始化图表
-            initChart();
-            
-            // 初始化生活方式评分
-            updateLifestyleScore();
-            
-            // 初始预测
-            updatePredictions();
-        });
-        
-        // 计算生活方式评分
-        function updateLifestyleScore() {
-            // 获取5个生活方式因素分数
-            const dietScore = parseInt(document.getElementById('diet_score').value);
-            const smokingScore = parseInt(document.getElementById('smoking_score').value);
-            const alcoholScore = parseInt(document.getElementById('alcohol_score').value);
-            const paScore = parseInt(document.getElementById('physical_activity_score').value);
-            const sleepScore = parseInt(document.getElementById('sleep_score').value);
-            
-            // 计算总分 (0-5分)
-            const totalScore = dietScore + smokingScore + alcoholScore + paScore + sleepScore;
-            
-            // 更新显示
-            document.querySelector('#lifestyle_score_text span').textContent = totalScore;
-            
-            // 更新进度条
-            const progressBar = document.getElementById('lifestyle_score_bar');
-            progressBar.style.width = (totalScore / 5 * 100) + '%';
-            progressBar.setAttribute('aria-valuenow', totalScore);
-            
-            // 根据分数设置进度条颜色和类别
-            const badge = document.getElementById('lifestyle_category_badge');
-            badge.classList.remove('lifestyle-unhealthy', 'lifestyle-intermediate', 'lifestyle-healthy');
-            progressBar.classList.remove('bg-danger', 'bg-warning', 'bg-success');
-            
-            let category = '';
-            if (totalScore <= 1) {
-                category = 'Unhealthy';
-                badge.classList.add('lifestyle-unhealthy');
-                badge.textContent = '不健康';
-                progressBar.classList.add('bg-danger');
-            } else if (totalScore <= 3) {
-                category = 'Intermediate';
-                badge.classList.add('lifestyle-intermediate');
-                badge.textContent = '中等';
-                progressBar.classList.add('bg-warning');
-            } else {
-                category = 'Healthy';
-                badge.classList.add('lifestyle-healthy');
-                badge.textContent = '健康';
-                progressBar.classList.add('bg-success');
-            }
-            
-            return {
-                score: totalScore,
-                category: category
-            };
-        }
-        
-        // 初始化图表
-        function initChart() {
-            const ctx = document.getElementById('riskChart').getContext('2d');
-            
-            riskChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['1年', '2年', '3年', '4年', '5年', '6年', '7年', '8年', '9年', '10年'],
-                    datasets: []
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 1,
-                            title: {
-                                display: true,
-                                text: '风险概率'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return (value * 100) + '%';
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: '未来10年眼科疾病风险预测'
-                        }
-                    }
-                }
-            });
-        }
-        
-        // 更新预测
-        function updatePredictions() {
-            // 显示加载状态
-            document.querySelector('.loading').style.display = 'flex';
-            
-            // 获取所有输入值
-            const inputs = getFormInputs();
-            
-            // 清空上次预测结果
-            lastPredictions = [];
-            
-            // 模拟API调用延迟
-            setTimeout(() => {
-                // 进行5次预测
-                for (let i = 0; i < 5; i++) {
-                    const predictions = predictRisk(inputs);
-                    lastPredictions.push(predictions);
-                }
-                
-                // 更新图表
-                updateChart();
-                
-                // 更新风险总结
-                updateRiskSummary();
-                
-                // 更新因素分析
-                updateFactorAnalysis(inputs);
-                
-                // 隐藏加载状态
-                document.querySelector('.loading').style.display = 'none';
-            }, 700); // 模拟服务器延迟
-        }
-        
-        // 获取表单输入
-        function getFormInputs() {
-            // 获取生活方式评分
-            const lifestyleResult = updateLifestyleScore();
-            
-            return {
-                prs_score: parseFloat(document.getElementById('prs_score').value),
-                prs_category: document.getElementById('prs_category').value,
-                lifestyle_score: lifestyleResult.score,
-                lifestyle_category: lifestyleResult.category,
-                diet_score: parseInt(document.getElementById('diet_score').value),
-                smoking_score: parseInt(document.getElementById('smoking_score').value),
-                alcohol_score: parseInt(document.getElementById('alcohol_score').value),
-                physical_activity_score: parseInt(document.getElementById('physical_activity_score').value),
-                sleep_score: parseInt(document.getElementById('sleep_score').value),
-                townsend: parseFloat(document.getElementById('townsend').value),
-                crf_d: document.getElementById('crf_d').value,
-                education: document.getElementById('education').value,
-                bmi_group: document.getElementById('bmi_group').value,
-                hypertension: document.getElementById('hypertension').value,
-                age: parseInt(document.getElementById('age').value),
-                sex: document.getElementById('sex').value
-            };
-        }
-        
-        // 预测风险（模拟DeepSurv模型）
-        function predictRisk(inputs) {
-            /* 
-            在实际部署中，这里应该是调用后端API的函数，例如:
-            
-            async function predictRisk(inputs) {
-                try {
-                    const response = await fetch('/api/predict', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(inputs)
-                    });
-                    const data = await response.json();
-                    return data.predictions;
-                } catch (error) {
-                    console.error('预测失败:', error);
-                    return Array(10).fill(0);
-                }
-            }
-            
-            下面是前端模拟预测模型的逻辑
-            */
-            
-            // 基础风险因子（根据模型实际情况调整）
-            let baseRisk = 0.02;
-            
-            // 遗传风险评分影响（最重要的特征）
-            baseRisk *= (1 + inputs.prs_score * 0.3);
-            
-            // 遗传风险类别
-            if (inputs.prs_category === 'medium') baseRisk *= 1.3;
-            if (inputs.prs_category === 'high') baseRisk *= 1.8;
-            
-            // 生活方式评分（总分0-5，得分越高风险越低）
-            // 根据生活方式类别
-            if (inputs.lifestyle_category === 'Unhealthy') {
-                baseRisk *= 1.5;
-            } else if (inputs.lifestyle_category === 'Intermediate') {
-                baseRisk *= 1.2;
-            } else { // Healthy
-                baseRisk *= 0.8;
-            }
-            
-            // 各个生活方式因素的单独影响（稍微调整以反映不同因素的权重）
-            if (inputs.diet_score === 0) baseRisk *= 1.1;  // 不健康饮食
-            if (inputs.smoking_score === 0) baseRisk *= 1.3; // 吸烟
-            if (inputs.alcohol_score === 0) baseRisk *= 1.15; // 高酒精摄入
-            if (inputs.physical_activity_score === 0) baseRisk *= 1.2; // 低身体活动
-            if (inputs.sleep_score === 0) baseRisk *= 1.1; // 不良睡眠
-            
-            // Townsend指数（越高表示越贫困，风险越高）
-            baseRisk *= (1 + inputs.townsend * 0.05);
-            
-            // 慢性肾病
-            if (inputs.crf_d === 'yes') baseRisk *= 1.4;
-            
-            // 教育水平
-            if (inputs.education === 'uncollege') baseRisk *= 1.1;
-            if (inputs.education === 'unknown') baseRisk *= 1.2;
-            
-            // BMI分组
-            if (inputs.bmi_group === '1') baseRisk *= 1.15;
-            if (inputs.bmi_group === '2') baseRisk *= 1.3;
-            
-            // 高血压
-            if (inputs.hypertension === 'yes') baseRisk *= 1.25;
-            
-            // 年龄（年龄每增加10岁，风险增加20%）
-            baseRisk *= (1 + (inputs.age - 55) * 0.02);
-            
-            // 性别
-            if (inputs.sex === 'male') baseRisk *= 0.9;
-            
-            // 加入随机变异（模拟模型的不确定性）
-            const randomFactor = 0.85 + Math.random() * 0.3;
-            baseRisk *= randomFactor;
-            
-            // 生成10年风险
-            const risks = [];
-            for (let year = 1; year <= 10; year++) {
-                // 风险随时间非线性增长
-                let yearRisk = baseRisk * Math.sqrt(year);
-                // 确保风险值在合理范围内
-                yearRisk = Math.min(Math.max(yearRisk, 0.01), 0.99);
-                risks.push(yearRisk);
-            }
-            
-            return risks;
-        }
-        
-        // 更新图表
-        function updateChart() {
-            if (lastPredictions.length === 0) return;
-            
-            // 转置数据，按年份组织
-            const yearData = Array(10).fill(0).map(() => []);
-            for (const prediction of lastPredictions) {
-                for (let i = 0; i < 10; i++) {
-                    yearData[i].push(prediction[i]);
-                }
-            }
-            
-            // 计算每年的均值和95%置信区间
-            const chartData = yearData.map(yearValues => {
-                const mean = yearValues.reduce((a, b) => a + b, 0) / yearValues.length;
-                const sorted = [...yearValues].sort((a, b) => a - b);
-                return {
-                    mean: mean,
-                    lower: sorted[0],
-                    upper: sorted[sorted.length - 1]
-                };
-            });
-            
-            // 更新图表数据
-            if (riskChart) {
-                riskChart.data.datasets = [{
-                    label: '平均风险',
-                    backgroundColor: 'rgba(24, 144, 255, 0.2)',
-                    borderColor: 'rgba(24, 144, 255, 1)',
-                    borderWidth: 2,
-                    data: chartData.map(d => d.mean),
-                    fill: false
-                }, {
-                    label: '风险范围',
-                    backgroundColor: 'rgba(24, 144, 255, 0.2)',
-                    borderColor: 'transparent',
-                    data: chartData.map(d => d.mean),
-                    fill: false,
-                    pointRadius: 0
-                }];
-                
-                // 添加误差带
-                riskChart.data.datasets[1].fill = {
-                    target: 'origin',
-                    above: 'rgba(24, 144, 255, 0.2)'
-                };
-                riskChart.data.datasets[1].pointRadius = 0;
-                
-                // 这里模拟箱线图的上下区间
-                riskChart.data.datasets.push({
-                    label: '风险上限',
-                    data: chartData.map(d => d.upper),
-                    borderColor: 'rgba(24, 144, 255, 0.5)',
-                    backgroundColor: 'transparent',
-                    borderWidth: 1,
-                    borderDash: [5, 5],
-                    fill: false,
-                    pointRadius: 0
-                });
-                
-                riskChart.data.datasets.push({
-                    label: '风险下限',
-                    data: chartData.map(d => d.lower),
-                    borderColor: 'rgba(24, 144, 255, 0.5)',
-                    backgroundColor: 'transparent',
-                    borderWidth: 1,
-                    borderDash: [5, 5],
-                    fill: false,
-                    pointRadius: 0
-                });
-                
-                riskChart.update();
-            }
-        }
-        
-        // 更新风险总结
-        function updateRiskSummary() {
-            if (lastPredictions.length === 0) return;
-            
-            // 计算第5年和第10年的平均风险
-            let risk5year = 0;
-            let risk10year = 0;
-            
-            for (const prediction of lastPredictions) {
-                risk5year += prediction[4]; // 第5年
-                risk10year += prediction[9]; // 第10年
-            }
-            
-            risk5year /= lastPredictions.length;
-            risk10year /= lastPredictions.length;
-            
-            // 更新显示
-            document.querySelector('#risk5year span').textContent = (risk5year * 100).toFixed(2) + '%';
-            document.querySelector('#risk10year span').textContent = (risk10year * 100).toFixed(2) + '%';
-            
-            // 判断风险等级
-            const riskLevel = document.getElementById('riskLevel');
-            riskLevel.classList.remove('risk-low', 'risk-medium', 'risk-high');
-            
-            if (risk10year < 0.1) {
-                riskLevel.textContent = '低风险';
-                riskLevel.classList.add('risk-low');
-            } else if (risk10year < 0.25) {
-                riskLevel.textContent = '中等风险';
-                riskLevel.classList.add('risk-medium');
-            } else {
-                riskLevel.textContent = '高风险';
-                riskLevel.classList.add('risk-high');
-            }
-        }
-        
-        // 更新因素分析
-        function updateFactorAnalysis(inputs) {
-            const factorDiv = document.getElementById('factorAnalysis');
-            
-            // 计算风险最终值
-            const predictions = lastPredictions[0]; // 使用第一组预测结果
-            const risk10year = predictions[9]; // 第10年风险
-            
-            // 格式化HTML内容
-            let html = '<div class="mb-4">';
-            
-            // 添加主要因素分析
-            html += '<h5>主要风险因素评估</h5>';
-            
-            // 构建生活方式因素分析
-            html += '<div class="card mb-3">';
-            html += '<div class="card-body">';
-            html += '<h6 class="card-title">生活方式分析</h6>';
-            
-            // 生活方式总体评估
-            html += `<p>您的生活方式评分为 <strong>${inputs.lifestyle_score}/5</strong>，属于 
-                    <span class="badge ${inputs.lifestyle_category === 'Healthy' ? 'bg-success' : 
-                                        (inputs.lifestyle_category === 'Intermediate' ? 'bg-warning' : 'bg-danger')}">
-                    ${inputs.lifestyle_category === 'Healthy' ? '健康' : 
-                      (inputs.lifestyle_category === 'Intermediate' ? '中等' : '不健康')}
-                    </span> 水平</p>`;
-            
-            // 生活方式各项因素
-            html += '<ul class="list-group list-group-flush">';
-            
-            // 饮食
-            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    饮食习惯
-                    <span class="badge ${inputs.diet_score === 1 ? 'bg-success' : 'bg-danger'}">
-                    ${inputs.diet_score === 1 ? '健康' : '不健康'}
-                    </span>
-                    </li>`;
-            
-            // 吸烟
-            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    吸烟状态
-                    <span class="badge ${inputs.smoking_score === 1 ? 'bg-success' : 'bg-danger'}">
-                    ${inputs.smoking_score === 1 ? '从不吸烟' : '现在或曾经吸烟'}
-                    </span>
-                    </li>`;
-            
-            // 酒精
-            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    酒精摄入
-                    <span class="badge ${inputs.alcohol_score === 1 ? 'bg-success' : 'bg-danger'}">
-                    ${inputs.alcohol_score === 1 ? '低风险' : '高风险'}
-                    </span>
-                    </li>`;
-            
-            // 身体活动
-            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    身体活动与久坐
-                    <span class="badge ${inputs.physical_activity_score === 1 ? 'bg-success' : 'bg-danger'}">
-                    ${inputs.physical_activity_score === 1 ? '活动充分' : '活动不足/久坐过多'}
-                    </span>
-                    </li>`;
-            
-            // 睡眠
-            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    睡眠时间
-                    <span class="badge ${inputs.sleep_score === 1 ? 'bg-success' : 'bg-danger'}">
-                    ${inputs.sleep_score === 1 ? '充足(6-8小时)' : '不足或过多'}
-                    </span>
-                    </li>`;
-            
-            html += '</ul>';
-            html += '</div></div>';
-            
-            // 评估其他风险因素
-            let factors = [];
-            
-            // 遗传风险
-            if (inputs.prs_score > 1 || inputs.prs_category === 'high') {
-                factors.push({
-                    name: '遗传风险',
-                    value: `PRS=${inputs.prs_score.toFixed(1)}`,
-                    impact: 0.9,
-                    description: '您的遗传风险较高，这是眼科疾病风险的重要影响因素'
-                });
-            } else if (inputs.prs_score > 0 || inputs.prs_category === 'medium') {
-                factors.push({
-                    name: '遗传风险',
-                    value: `PRS=${inputs.prs_score.toFixed(1)}`,
-                    impact: 0.6,
-                    description: '您的遗传风险处于中等水平'
-                });
-            }
-            
-            // 生活方式
-            if (inputs.lifestyle_score <= 1) {
-                factors.push({
-                    name: '生活方式',
-                    value: `${inputs.lifestyle_score}/5分`,
-                    impact: 0.85,
-                    description: '不健康的生活方式会显著增加眼科疾病风险'
-                });
-            } else if (inputs.lifestyle_score <= 3) {
-                factors.push({
-                    name: '生活方式',
-                    value: `${inputs.lifestyle_score}/5分`,
-                    impact: 0.6,
-                    description: '生活方式有改进空间，可降低眼科疾病风险'
-                });
-            }
-            
-            // 慢性肾病
-            if (inputs.crf_d === 'yes') {
-                factors.push({
-                    name: '慢性肾病',
-                    value: '有',
-                    impact: 0.8,
-                    description: '慢性肾病是增加眼科疾病风险的重要因素'
-                });
-            }
-            
-            // BMI
-            if (inputs.bmi_group === '2') {
-                factors.push({
-                    name: 'BMI状态',
-                    value: '肥胖',
-                    impact: 0.75,
-                    description: '肥胖会增加眼科疾病风险，建议减重'
-                });
-            } else if (inputs.bmi_group === '1') {
-                factors.push({
-                    name: 'BMI状态',
-                    value: '超重',
-                    impact: 0.5,
-                    description: '超重略微增加眼科疾病风险，建议控制体重'
-                });
-            }
-            
-            // 高血压
-            if (inputs.hypertension === 'yes') {
-                factors.push({
-                    name: '高血压',
-                    value: '有',
-                    impact: 0.7,
-                    description: '高血压会损害血管，增加眼科疾病风险'
-                });
-            }
-            
-            // 年龄
-            if (inputs.age > 65) {
-                factors.push({
-                    name: '年龄',
-                    value: `${inputs.age}岁`,
-                    impact: 0.65,
-                    description: '年龄是眼科疾病的主要不可改变风险因素'
-                });
-            }
-            
-            // 社会经济因素
-            if (inputs.townsend > 3) {
-                factors.push({
-                    name: '社会经济状况',
-                    value: `Townsend=${inputs.townsend.toFixed(1)}`,
-                    impact: 0.55,
-                    description: '社会经济状况较差可能影响医疗资源获取'
-                });
-            }
-            
-            // 按风险从高到低排序
-            factors.sort((a, b) => b.impact - a.impact);
-            
-            // 构建风险因素HTML
-            if (factors.length > 0) {
-                html += '<h5 class="mt-4">关键风险因素</h5>';
-                html += '<div class="mt-3">';
-                
-                for (const factor of factors) {
-                    html += `
-                    <div class="factor-item">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="factor-title">${factor.name}</span>
-                            <span class="factor-value">${factor.value}</span>
-                        </div>
-                        <div class="progress mt-1 mb-1" style="height: 6px;">
-                            <div class="progress-bar bg-${getColorByImpact(factor.impact)}" 
-                                 style="width: ${factor.impact * 100}%"></div>
-                        </div>
-                        <small class="text-muted">${factor.description}</small>
-                    </div>`;
-                }
-                
-                html += '</div>';
-            }
-            
-            // 添加保护因素
-            let protectiveFactors = [];
-            
-            if (inputs.lifestyle_score >= 4) {
-                protectiveFactors.push({
-                    name: '健康生活方式',
-                    value: `${inputs.lifestyle_score}/5分`,
-                    description: '健康的生活方式有助于降低眼科疾病风险'
-                });
-            }
-            
-            if (inputs.bmi_group === '0') {
-                protectiveFactors.push({
-                    name: '正常体重',
-                    value: 'BMI < 25',
-                    description: '保持健康体重有助于降低眼科疾病风险'
-                });
-            }
-            
-            if (inputs.hypertension === 'no') {
-                protectiveFactors.push({
-                    name: '血压正常',
-                    value: '无高血压',
-                    description: '正常血压有利于眼部健康'
-                });
-            }
-            
-            if (protectiveFactors.length > 0) {
-                html += '<h5 class="mt-4">保护因素</h5>';
-                html += '<ul class="list-group">';
-                
-                for (const factor of protectiveFactors) {
-                    html += `
-                    <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>${factor.name}</strong>
-                            <p class="mb-0 small">${factor.description}</p>
-                        </div>
-                        <span class="badge bg-success">${factor.value}</span>
-                    </li>`;
-                }
-                
-                html += '</ul>';
-            }
-            
-            // 添加风险趋势分析
-            html += `
-            <div class="mt-4">
-                <h5>风险趋势分析</h5>
-                <p>根据您的个人信息，10年累积风险约为 <strong>${(risk10year * 100).toFixed(1)}%</strong>。
-                ${risk10year < 0.1 ? 
-                    '您的风险较低，建议保持健康生活方式，每1-2年进行一次常规眼科检查。' : 
-                    risk10year < 0.25 ? 
-                    '您的风险处于中等水平，建议每年进行一次眼科检查，并注意控制可改变的风险因素。' :
-                    '您的风险较高，建议每6个月进行一次眼科检查，严格控制风险因素，并咨询眼科专家。'
-                }</p>
-            </div>`;
-            
-            html += '</div>';
-            
-            factorDiv.innerHTML = html;
-        }
-        
-        // 根据影响度获取颜色
-        function getColorByImpact(impact) {
-            if (impact < 0.3) return 'success';
-            if (impact < 0.6) return 'warning';
-            return 'danger';
-        }
-    </script>
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">广州医科大学 · 第二临床学院</div>
+          <div class="card-meta">临床医学 — 麻醉学方向 &nbsp;|&nbsp; 2022.09 — 至今</div>
+        </div>
+        <span class="badge badge-blue">在读</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-item"><div class="stat-val">3.93<span style="font-size:0.7rem;color:var(--muted)">/5</span></div><div class="stat-lbl">GPA</div></div>
+        <div class="stat-item"><div class="stat-val">3<span style="font-size:0.7rem;color:var(--muted)">/67</span></div><div class="stat-lbl">绩点排名</div></div>
+        <div class="stat-item"><div class="stat-val">2<span style="font-size:0.7rem;color:var(--muted)">/67</span></div><div class="stat-lbl">综合测评</div></div>
+        <div class="stat-item"><div class="stat-val">CET-6</div><div class="stat-lbl">英语水平</div></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent2),var(--accent3))"></div>
+      <div class="card-title" style="margin-bottom:16px">核心课程成绩</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px">
+        <div class="stat-item"><div class="stat-val">97</div><div class="stat-lbl">生理学</div></div>
+        <div class="stat-item"><div class="stat-val">97</div><div class="stat-lbl">病理学</div></div>
+        <div class="stat-item"><div class="stat-val">96</div><div class="stat-lbl">药理学</div></div>
+        <div class="stat-item"><div class="stat-val">95</div><div class="stat-lbl">实验诊断学</div></div>
+        <div class="stat-item"><div class="stat-val">94</div><div class="stat-lbl">生物化学</div></div>
+        <div class="stat-item"><div class="stat-val">94</div><div class="stat-lbl">病理生理学</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESEARCH ==================== -->
+  <section id="research" class="section">
+    <button class="back-btn" onclick="showHero()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回主页
+    </button>
+    <div class="sec-header">
+      <span class="sec-tag">Research</span>
+      <h2 class="sec-title">科研经历</h2>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2025 — 至今</div>
+        <div class="card" style="margin-top:8px">
+          <div class="card-accent"></div>
+          <div class="card-header">
+            <div>
+              <div class="card-title">中山大学公共卫生学院 · 张王剑教授课题组</div>
+              <div class="card-meta">环境流行病学 · 科研学习</div>
+            </div>
+            <span class="badge badge-green">进行中</span>
+          </div>
+          <p class="body-text">专注于大气污染物（PM2.5 组分）与心血管、代谢疾病死亡率的长期因果关联研究，综合运用因果推断统计建模、面板数据分析及多维健康不平等探索。</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent3);box-shadow:0 0 10px rgba(167,139,250,0.5)"></div>
+        <div class="tl-date">2023 — 2024</div>
+        <div class="card" style="margin-top:8px">
+          <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent2),var(--accent3))"></div>
+          <div class="card-header">
+            <div>
+              <div class="card-title">中法霍夫曼免疫研究所 · 师宪平教授课题组</div>
+              <div class="card-meta">肿瘤转录调控与靶向治疗</div>
+            </div>
+            <span class="badge badge-violet">已完成</span>
+          </div>
+          <p class="body-text">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、动物模型等多项实验工作，并以第二作者身份参与发表 Advanced Science 论文。</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--gold);box-shadow:0 0 10px rgba(240,192,96,0.5)"></div>
+        <div class="tl-date">2022 — 2023</div>
+        <div class="card" style="margin-top:8px">
+          <div class="card-accent" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div>
+          <div class="card-header">
+            <div>
+              <div class="card-title">广州医科大学青年志愿者协会</div>
+              <div class="card-meta">部长 · 学院科研部干事</div>
+            </div>
+            <span class="badge badge-gold">已完成</span>
+          </div>
+          <p class="body-text">担任青年志愿者协会部长期间统筹部门工作，同步任职学院科研部干事，积极推动科研文化建设与学生科研活动的组织开展。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(to bottom,#34d399,var(--accent1))"></div>
+        <div class="card-title" style="margin-bottom:16px">项目立项</div>
+        <div style="margin-bottom:16px">
+          <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:12px">
+            <span class="badge badge-blue" style="margin-top:2px">省级</span>
+            <div>
+              <div style="font-size:0.92rem;font-weight:500">《核心转录调控环路驱动非小细胞肺癌奥西替尼耐药的作用与机制研究》</div>
+              <div style="font-size:0.8rem;color:var(--muted);margin-top:3px">负责人</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span class="badge badge-violet" style="margin-top:2px">校级</span>
+            <div>
+              <div style="font-size:0.92rem;font-weight:500">《超级增强子驱动SOX4/SMAD3互作介导质膜重塑促进慢粒白血病急髓变的作用机制研究》</div>
+              <div style="font-size:0.8rem;color:var(--muted);margin-top:3px">成员</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div>
+        <div class="card-title">社会实践</div>
+        <p class="body-text">2023 年获评惠州市青年大学生"百千万工程"突击队行动优秀队伍，作为团队成员参与乡村振兴与基层医疗调研工作。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PUBLICATIONS ==================== -->
+  <section id="pub" class="section">
+    <button class="back-btn" onclick="showHero()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回主页
+    </button>
+    <div class="sec-header">
+      <span class="sec-tag">Publications</span>
+      <h2 class="sec-title">科研成果</h2>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stat-row" style="margin-bottom:36px">
+      <div class="stat-item"><div class="stat-val">7+</div><div class="stat-lbl">已发表/在审</div></div>
+      <div class="stat-item"><div class="stat-val">9</div><div class="stat-lbl">在投文章</div></div>
+      <div class="stat-item"><div class="stat-val">3</div><div class="stat-lbl">第一作者</div></div>
+      <div class="stat-item"><div class="stat-val">5</div><div class="stat-lbl">一区 TOP</div></div>
+    </div>
+
+    <!-- Paper 1 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num">1</div>
+        <div style="flex:1">
+          <div class="card-header" style="margin-bottom:8px">
+            <div style="flex:1">
+              <div class="card-title" style="font-size:0.95rem;line-height:1.5">A non-canonical core transcriptional regulatory circuit orchestrates chromatin reprogramming to drive Osimertinib resistance in non-small cell lung cancer</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+            <span class="badge badge-blue">Advanced Science</span>
+            <span class="badge badge-gold">中科院一区 TOP · IF 14.1</span>
+            <span class="badge badge-violet">第二作者</span>
+            <span class="badge badge-rose">Under Revision</span>
+          </div>
+          <p class="body-text">发现由多分子协同驱动的非经典核心转录调控网络介导非小细胞肺癌奥西替尼耐药；揭示辅因子稳固转录复合体、驱动肿瘤神经内分泌分化及抑制铁死亡的分子机制；验证双靶点联合抑制方案可有效逆转耐药，提供新型联合用药策略。</p>
+          <div class="divider" style="margin-top:14px"></div>
+          <div style="font-size:0.8rem;color:var(--muted)">个人贡献：科研概念图绘制、方法学撰写、Figure Legend；通路分析、药物联用、分子对接及可视化；Western Blot、流式细胞术、动物灌胃模型</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper 2 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent2),var(--accent3))"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num" style="background:linear-gradient(135deg,var(--accent2),var(--accent3))">2</div>
+        <div style="flex:1">
+          <div class="card-title" style="font-size:0.95rem;line-height:1.5;margin-bottom:8px">Super-enhancer-driven SOX4/SMAD3 mediate membrane remodeling by regulating phospholipid metabolism to accelerate leukemia progression</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+            <span class="badge badge-blue">Advanced Science</span>
+            <span class="badge badge-gold">中科院一区 TOP · IF 14.1</span>
+            <span class="badge badge-violet">核心成员</span>
+            <span class="badge badge-green">已发表</span>
+          </div>
+          <p class="body-text">揭示超级增强子驱动 SOX4/SMAD3 正反馈环路，共同激活 AXL/LPCAT1 轴增强 AKT/ERK/STAT5 信号，加速慢粒白血病向急变期进展；证实 Bemcentinib 靶向 AXL 可显著抑制 CML-BP，提供新治疗策略。</p>
+          <div class="divider" style="margin-top:14px"></div>
+          <div style="font-size:0.8rem;color:var(--muted)">个人贡献：Western Blot、数据分析及可视化</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper 3 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,#34d399,var(--accent1))"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num" style="background:linear-gradient(135deg,#34d399,var(--accent1))">3</div>
+        <div style="flex:1">
+          <div class="card-title" style="font-size:0.95rem;line-height:1.5;margin-bottom:8px">Nationwide Causal Effects of PM2.5 Component Mixture on Ischemic Heart Disease Mortality in the United States, 2000–2019</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+            <span class="badge badge-blue">Ecotoxicology and Environmental Safety</span>
+            <span class="badge badge-gold">中科院小类一区 · IF 6.1</span>
+            <span class="badge badge-green">第一作者</span>
+            <span class="badge badge-rose">Under Revision</span>
+          </div>
+          <p class="body-text">利用美国 20 年全国县级面板数据，系统探究 PM2.5 化学组分混合物对缺血性心脏病死亡率的长期因果关联；明确硫酸盐与硝酸盐的主导权重；揭示种族、经济与气候维度的健康不平等，为靶向减排公共卫生干预提供依据。</p>
+          <div class="divider" style="margin-top:14px"></div>
+          <div style="font-size:0.8rem;color:var(--muted)">个人贡献：核心数据收集（空气网格、死亡结局）、爬虫代码编写、可视化、全文与 Cover Letter 撰写</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper 4 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num" style="background:linear-gradient(135deg,var(--gold),#f97316)">4</div>
+        <div style="flex:1">
+          <div class="card-title" style="font-size:0.95rem;line-height:1.5;margin-bottom:8px">Causal Effects of PM2.5 Component Mixture on Endocrine, Nutritional, and Metabolic Disease Mortality: Evidence from a Nationwide U.S. Study</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="badge badge-blue">Environment International</span>
+            <span class="badge badge-gold">SCI 一区 TOP · IF 9.7</span>
+            <span class="badge badge-green">第一作者</span>
+            <span class="badge badge-rose">Under Review</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper 5 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,#f0abfc,var(--accent2))"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num" style="background:linear-gradient(135deg,#f0abfc,var(--accent2))">5</div>
+        <div style="flex:1">
+          <div class="card-title" style="font-size:0.95rem;line-height:1.5;margin-bottom:8px">Silicified curcumin microspheres Combats cardiovascular diseases via Nrf2/HO-1 pathway</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="badge badge-blue">Bioactive Materials</span>
+            <span class="badge badge-gold">中科院一区 TOP · IF 20.3</span>
+            <span class="badge badge-violet">核心成员</span>
+            <span class="badge badge-green">已发表</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper 6 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,#67e8f9,var(--accent1))"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num" style="background:linear-gradient(135deg,#67e8f9,var(--accent1))">6</div>
+        <div style="flex:1">
+          <div class="card-title" style="font-size:0.95rem;line-height:1.5;margin-bottom:8px">Development of the Retinal Senescence Protein Signature Based on Proteomics to Evaluate the Progression of Diabetic Retinopathy</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="badge badge-blue">Visual Neuroscience</span>
+            <span class="badge badge-violet">Q2 · IF 6.18</span>
+            <span class="badge badge-green">第一作者 · 已发��</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paper 7 -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,#fda4af,var(--accent2))"></div>
+      <div class="pub-entry" style="margin-bottom:0">
+        <div class="pub-num" style="background:linear-gradient(135deg,#fda4af,#f43f5e)">7</div>
+        <div style="flex:1">
+          <div class="card-title" style="font-size:0.95rem;line-height:1.5;margin-bottom:8px">Global Patterns and Individual Risk Phenotypes of Cardiovascular Disease in Thoracic Malignancy: Analysis of Global Burden of Disease 2021 and UK Biobank</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="badge badge-violet">中科院三区 Q2 · IF 2.4</span>
+            <span class="badge badge-blue">第二作者</span>
+            <span class="badge badge-rose">Under Review</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In progress -->
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--muted),transparent)"></div>
+      <div class="card-title" style="margin-bottom:12px">在投文章（9 篇）</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span class="badge badge-blue">一区 TOP 核心成员 × 5</span>
+        <span class="badge badge-violet">三区第一作者 × 2</span>
+        <span class="badge badge-violet">三区核心成员 × 2</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COMPETITIONS ==================== -->
+  <section id="comp" class="section">
+    <button class="back-btn" onclick="showHero()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回主页
+    </button>
+    <div class="sec-header">
+      <span class="sec-tag">Competitions</span>
+      <h2 class="sec-title">学科竞赛</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">第二十届挑战杯"揭榜挂帅"专项赛</div>
+          <div class="card-meta">负责人</div>
+        </div>
+        <span class="badge badge-gold">国家级优秀奖</span>
+      </div>
+      <div class="divider"></div>
+      <p class="body-text">开发《基于深度学习及优化算法的中药多组分智能均化系统》，集成 CTGAN 数据扩充、LightGBM 质量评分模型及双引擎优化算法（SLSQP + NSGA-II），在多重约束下智能计算最优中药混批配比。</p>
+      <div class="divider"></div>
+      <div style="font-size:0.82rem;color:var(--muted)">统筹整体架构 · 主导 LightGBM 模型构建 · 设计"小药 LLM"交互 · 独立构建前端可运行网页 · 推动软著申请</div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent2),var(--accent3))"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-title">2024 年广东省生物化学实验技能大赛</div>
+          <div class="card-meta">负责人</div>
+        </div>
+        <span class="badge badge-blue">省级一等奖</span>
+      </div>
+      <div class="divider"></div>
+      <p class="body-text">鉴定 SOX4 为驱动 CML 急变的关键靶点，首次验证"老药新用"——二甲双胍靶向下调 SOX4，与伊马替尼联用产生显著协同杀伤效应���相关成果已发表于 <em>Advanced Science</em>。</p>
+      <div class="divider"></div>
+      <div style="font-size:0.82rem;color:var(--muted)">主导大数据分析 · Western Blot · 流式细胞术 · 竞赛论文撰写与答辩</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+
+      <div class="card" style="margin-bottom:0">
+        <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent1),transparent)"></div>
+        <div class="card-header">
+          <div class="card-title" style="font-size:0.9rem">全国大学生统计建模大赛</div>
+          <span class="badge badge-blue" style="font-size:0.68rem">省级二等奖</span>
+        </div>
+        <div class="card-meta" style="margin-top:4px">2025年 · 负责人</div>
+      </div>
+
+      <div class="card" style="margin-bottom:0">
+        <div class="card-accent" style="background:linear-gradient(to bottom,#34d399,transparent)"></div>
+        <div class="card-header">
+          <div class="card-title" style="font-size:0.9rem">全国大学生生命科学竞赛</div>
+          <span class="badge badge-violet" style="font-size:0.68rem">省级三等奖</span>
+        </div>
+        <div class="card-meta" style="margin-top:4px">2024年 · 第 1 成员</div>
+      </div>
+
+      <div class="card" style="margin-bottom:0">
+        <div class="card-accent" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div>
+        <div class="card-header">
+          <div class="card-title" style="font-size:0.9rem">电子商务"三创"挑战赛</div>
+          <span class="badge badge-gold" style="font-size:0.68rem">校级特等奖</span>
+        </div>
+        <div class="card-meta" style="margin-top:4px">2025年 · 第 1 成员</div>
+      </div>
+
+      <div class="card" style="margin-bottom:0">
+        <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent3),transparent)"></div>
+        <div class="card-header">
+          <div class="card-title" style="font-size:0.9rem">麻醉学专业知识竞赛（第四届）</div>
+          <span class="badge badge-violet" style="font-size:0.68rem">校级二等奖</span>
+        </div>
+        <div class="card-meta" style="margin-top:4px">2025年 · 个人</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== AWARDS ==================== -->
+  <section id="award" class="section">
+    <button class="back-btn" onclick="showHero()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回主页
+    </button>
+    <div class="sec-header">
+      <span class="sec-tag">Honors</span>
+      <h2 class="sec-title">荣誉奖项</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--gold),var(--accent1))"></div>
+
+      <div class="award-row">
+        <div class="award-dot" style="background:var(--gold);box-shadow:0 0 10px rgba(240,192,96,0.6)"></div>
+        <div class="award-text">
+          <span style="color:var(--gold);font-weight:600">中华人民共和国教育部国家奖学金</span>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px">全国最高荣誉学生奖学金</div>
+        </div>
+        <div class="award-year">2024</div>
+      </div>
+
+      <div class="award-row">
+        <div class="award-dot"></div>
+        <div class="award-text">校级优秀学生奖学金一等奖</div>
+        <div class="award-year">2024、2025</div>
+      </div>
+
+      <div class="award-row">
+        <div class="award-dot" style="background:var(--accent3);box-shadow:0 0 8px rgba(167,139,250,0.5)"></div>
+        <div class="award-text">广州医科大学优秀共青团员</div>
+        <div class="award-year">2023</div>
+      </div>
+
+      <div class="award-row">
+        <div class="award-dot" style="background:var(--accent3);box-shadow:0 0 8px rgba(167,139,250,0.5)"></div>
+        <div class="award-text">广州医科大学优秀班干部</div>
+        <div class="award-year">2023</div>
+      </div>
+
+      <div class="award-row">
+        <div class="award-dot" style="background:#34d399;box-shadow:0 0 8px rgba(52,211,153,0.5)"></div>
+        <div class="award-text">广州青年马克思主义工程优秀学员</div>
+        <div class="award-year">2023</div>
+      </div>
+
+      <div class="award-row" style="border-bottom:none">
+        <div class="award-dot" style="background:var(--muted)"></div>
+        <div class="award-text" style="color:var(--muted)">另有校、院级奖项若干</div>
+        <div class="award-year">—</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS ==================== -->
+  <section id="skill" class="section">
+    <button class="back-btn" onclick="showHero()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回主页
+    </button>
+    <div class="sec-header">
+      <span class="sec-tag">Skills</span>
+      <h2 class="sec-title">技能专长</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent"></div>
+      <div class="skill-group">
+        <div class="skill-group-title">临床医学</div>
+        <div class="skill-tags">
+          <span class="skill-tag">临床思维</span>
+          <span class="skill-tag">麻醉学理论</span>
+          <span class="skill-tag">基础医学全科</span>
+          <span class="skill-tag">临床技能操作</span>
+          <span class="skill-tag">实验诊断学</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="skill-group" style="margin-bottom:0">
+        <div class="skill-group-title">基础实验操作</div>
+        <div class="skill-tags">
+          <span class="skill-tag">细胞培养</span>
+          <span class="skill-tag">Western Blot</span>
+          <span class="skill-tag">qPCR</span>
+          <span class="skill-tag">流式细胞术</span>
+          <span class="skill-tag">动物实验</span>
+          <span class="skill-tag">分子对接</span>
+          <span class="skill-tag">质粒提取</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--accent2),var(--accent3))"></div>
+      <div class="skill-group">
+        <div class="skill-group-title">编程语言</div>
+        <div class="skill-tags">
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">HTML / CSS / JS</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="skill-group" style="margin-bottom:0">
+        <div class="skill-group-title">生物信息学</div>
+        <div class="skill-tags">
+          <span class="skill-tag">差异基因分析</span>
+          <span class="skill-tag">通路富集分析</span>
+          <span class="skill-tag">单细胞测序</span>
+          <span class="skill-tag">转录组可视化</span>
+          <span class="skill-tag">超级增强子分析</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-accent" style="background:linear-gradient(to bottom,#34d399,var(--accent1))"></div>
+      <div class="skill-group">
+        <div class="skill-group-title">机器学习 / 深度学习</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LightGBM</span>
+          <span class="skill-tag">CTGAN</span>
+          <span class="skill-tag">NSGA-II</span>
+          <span class="skill-tag">SLSQP</span>
+          <span class="skill-tag">模型调参</span>
+          <span class="skill-tag">LLM 微调</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="skill-group" style="margin-bottom:0">
+        <div class="skill-group-title">流行病学 / 统计分析</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Cox 分析</span>
+          <span class="skill-tag">Lcmm 轨迹</span>
+          <span class="skill-tag">交互作用</span>
+          <span class="skill-tag">RCS 限制性立方样条</span>
+          <span class="skill-tag">因果推断建模</span>
+          <span class="skill-tag">面板数据分析</span>
+          <span class="skill-tag">大数据爬虫</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div>
+      <div class="skill-group" style="margin-bottom:0">
+        <div class="skill-group-title">学术写作 / 其他</div>
+        <div class="skill-tags">
+          <span class="skill-tag">高水平英文论文写作</span>
+          <span class="skill-tag">Cover Letter 撰写</span>
+          <span class="skill-tag">科研概念图制作</span>
+          <span class="skill-tag">前端网页开发</span>
+          <span class="skill-tag">CET-6 英语</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div><!-- /page -->
+
+<script>
+  function showSection(id) {
+    document.getElementById('hero').style.display = 'none';
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) { target.classList.add('active'); window.scrollTo(0,0); }
+    return false;
+  }
+  function showHero() {
+    document.getElementById('hero').style.display = '';
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    window.scrollTo(0,0);
+    return false;
+  }
+  // prevent default on nav cards
+  document.querySelectorAll('.nav-card').forEach(el => {
+    el.addEventListener('click', e => e.preventDefault());
+  });
+</script>
 </body>
 </html>
