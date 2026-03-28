@@ -1,44 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="黄安东 — 广州医科大学麻醉学方向临床医学生个人简历，绩点排名 3/67，多篇 SCI 论文，保研申请资料。" />
   <title>黄安东 — 个人简历</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --glass:        rgba(255,255,255,0.62);
-      --glass-strong: rgba(255,255,255,0.78);
-      --glass-border: rgba(255,255,255,0.85);
-      --text:         #1a2035;
-      --muted:        #5a6480;
-      --accent1:      #3b82f6;
-      --accent2:      #6366f1;
-      --accent3:      #8b5cf6;
-      --gold:         #d97706;
-      --radius:       16px;
-      --transition:   0.38s cubic-bezier(.4,0,.2,1);
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html { scroll-behavior: smooth; }
+    :root {
+      --glass: rgba(255, 255, 255, 0.62);
+      --glass-strong: rgba(255, 255, 255, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --text: #1a2035;
+      --muted: #5a6480;
+      --accent1: #3b82f6;
+      --accent2: #6366f1;
+      --accent3: #8b5cf6;
+      --gold: #d97706;
+      --radius: 16px;
+      --transition: 0.38s cubic-bezier(.4, 0, .2, 1);
+      --bg: #dce8ff;
+      --sidebar-bg: rgba(255,255,255,0.82);
+      --sidebar-border: rgba(255,255,255,0.9);
+      --card-bg: rgba(255, 255, 255, 0.62);
+      --card-border: rgba(255,255,255,0.85);
+    }
+
+    [data-theme="dark"] {
+      --glass: rgba(20, 25, 50, 0.72);
+      --glass-strong: rgba(25, 30, 60, 0.85);
+      --glass-border: rgba(80, 100, 180, 0.30);
+      --text: #e2e8f8;
+      --muted: #94a3b8;
+      --bg: #0f1629;
+      --sidebar-bg: rgba(18, 22, 45, 0.92);
+      --sidebar-border: rgba(80, 100, 180, 0.25);
+      --card-bg: rgba(20, 25, 50, 0.72);
+      --card-border: rgba(80, 100, 180, 0.25);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       min-height: 100vh;
-      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
       font-size: 15px;
       line-height: 1.75;
       color: var(--text);
       overflow-x: hidden;
-      background: #dce8ff;
+      background: var(--bg);
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     /* ===================== ANIMATED LIGHT BLOBS ===================== */
     .blob-stage {
-      position: fixed; inset: 0; z-index: 0;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
       overflow: hidden;
       pointer-events: none;
     }
+
     .blob {
       position: absolute;
       border-radius: 50%;
@@ -46,60 +79,120 @@
       opacity: 0.55;
       will-change: transform;
     }
+
     .b1 {
-      width: 680px; height: 680px;
+      width: 680px;
+      height: 680px;
       background: radial-gradient(circle, #a5c8ff, #60a5fa);
-      top: -200px; left: -200px;
+      top: -200px;
+      left: -200px;
       animation: drift1 18s ease-in-out infinite alternate;
     }
+
     .b2 {
-      width: 560px; height: 560px;
+      width: 560px;
+      height: 560px;
       background: radial-gradient(circle, #c4b5fd, #818cf8);
-      top: 20%; right: -180px;
+      top: 20%;
+      right: -180px;
       animation: drift2 22s ease-in-out infinite alternate;
     }
+
     .b3 {
-      width: 500px; height: 500px;
+      width: 500px;
+      height: 500px;
       background: radial-gradient(circle, #fbcfe8, #f9a8d4);
-      bottom: -160px; left: 25%;
+      bottom: -160px;
+      left: 25%;
       animation: drift3 20s ease-in-out infinite alternate;
     }
+
     .b4 {
-      width: 420px; height: 420px;
+      width: 420px;
+      height: 420px;
       background: radial-gradient(circle, #bbf7d0, #6ee7b7);
-      top: 55%; left: -120px;
+      top: 55%;
+      left: -120px;
       animation: drift4 25s ease-in-out infinite alternate;
     }
+
     .b5 {
-      width: 360px; height: 360px;
+      width: 360px;
+      height: 360px;
       background: radial-gradient(circle, #fde68a, #fbbf24);
-      top: 10%; left: 45%;
+      top: 10%;
+      left: 45%;
       animation: drift5 17s ease-in-out infinite alternate;
     }
 
     @keyframes drift1 {
-      0%   { transform: translate(0,   0)   scale(1);    }
-      100% { transform: translate(180px, 220px) scale(1.15); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(180px, 220px) scale(1.15);
+      }
     }
+
     @keyframes drift2 {
-      0%   { transform: translate(0,  0)    scale(1);    }
-      100% { transform: translate(-200px, 180px) scale(1.1); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(-200px, 180px) scale(1.1);
+      }
     }
+
     @keyframes drift3 {
-      0%   { transform: translate(0,  0)   scale(1);    }
-      100% { transform: translate(160px, -200px) scale(1.2); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(160px, -200px) scale(1.2);
+      }
     }
+
     @keyframes drift4 {
-      0%   { transform: translate(0,  0)   scale(1);    }
-      100% { transform: translate(220px, -160px) scale(1.1); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(220px, -160px) scale(1.1);
+      }
     }
+
     @keyframes drift5 {
-      0%   { transform: translate(0,  0)   scale(1);    }
-      100% { transform: translate(-120px, 200px) scale(0.9); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(-120px, 200px) scale(0.9);
+      }
     }
 
     /* ===================== LAYOUT ===================== */
-    .page { position: relative; z-index: 1; }
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===================== PROGRESS BAR ===================== */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      border-radius: 0 2px 2px 0;
+    }
 
     /* ===================== GLASS MIXIN ===================== */
     .glass {
@@ -107,104 +200,198 @@
       backdrop-filter: blur(22px) saturate(180%);
       -webkit-backdrop-filter: blur(22px) saturate(180%);
       border: 1px solid var(--glass-border);
-      box-shadow: 0 8px 32px rgba(80,100,180,0.10), 0 1.5px 0 rgba(255,255,255,0.7) inset;
+      box-shadow: 0 8px 32px rgba(80, 100, 180, 0.10), 0 1.5px 0 rgba(255, 255, 255, 0.7) inset;
     }
 
-/* ===================== TOP BAR (NEW) ===================== */
+    /* ===================== TOP BAR ===================== */
     .top-bar {
       position: absolute;
-      top: 24px; left: 24px; right: 24px;
-      display: flex; justify-content: space-between; align-items: center;
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       z-index: 10;
       animation: fadeDown 0.6s ease;
     }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .welcome-msg {
-      font-size: 0.88rem; color: var(--text);
+      font-size: 0.88rem;
+      color: var(--text);
       background: var(--glass-strong);
-      padding: 8px 18px; border-radius: 100px;
+      padding: 8px 18px;
+      border-radius: 100px;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 12px rgba(80,100,180,0.08);
+      box-shadow: 0 4px 12px rgba(80, 100, 180, 0.08);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       transition: all var(--transition);
+      cursor: default;
     }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .interactive-btn {
-      font-size: 0.88rem; color: var(--accent1);
+      font-size: 0.88rem;
+      color: var(--accent1);
       background: var(--glass-strong);
-      padding: 8px 18px; border-radius: 100px;
+      padding: 8px 18px;
+      border-radius: 100px;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 12px rgba(80,100,180,0.08);
-      cursor: pointer; font-weight: 600;
+      box-shadow: 0 4px 12px rgba(80, 100, 180, 0.08);
+      cursor: pointer;
+      font-weight: 600;
       transition: all var(--transition);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
+
     .interactive-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(59,130,246,0.2);
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
     }
+
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--glass-strong);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(80, 100, 180, 0.08);
+      transition: all var(--transition);
+    }
+
+    .theme-btn:hover {
+      transform: rotate(20deg) scale(1.1);
+    }
+
     @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    
+
     @media (max-width: 580px) {
-      .top-bar { flex-direction: column; gap: 10px; top: 16px; }
+      .top-bar {
+        flex-direction: column;
+        gap: 10px;
+        top: 16px;
+      }
     }
 
     /* ===================== HERO ===================== */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 70px 24px 60px;
     }
 
     .avatar-ring {
-      width: 96px; height: 96px; border-radius: 50%;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
       background: linear-gradient(135deg, #60a5fa, #818cf8, #c084fc);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto 28px;
-      box-shadow: 0 0 0 6px rgba(255,255,255,0.7),
-                  0 8px 32px rgba(96,165,250,0.35);
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.7),
+        0 8px 32px rgba(96, 165, 250, 0.35);
     }
+
     .avatar-ring .initials {
-      font-size: 30px; font-weight: 700; color: #fff; letter-spacing: 2px;
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
     }
 
     .hero-name {
       font-size: clamp(2.4rem, 6vw, 3.8rem);
-      font-weight: 800; letter-spacing: 0.03em;
+      font-weight: 800;
+      letter-spacing: 0.03em;
       background: linear-gradient(120deg, #2563eb, #6366f1, #8b5cf6);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 10px;
     }
+
     .hero-sub {
-      font-size: 0.92rem; color: var(--muted);
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
+
     .hero-desc {
-      font-size: 0.93rem; color: var(--muted);
-      max-width: 500px; margin: 0 auto 20px;
+      font-size: 0.93rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 20px;
     }
+
     .contact-row {
-      display: flex; gap: 20px; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 52px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
     }
+
     .contact-row a {
-      color: var(--accent1); font-size: 0.88rem;
-      text-decoration: none; letter-spacing: 0.04em;
-      padding-bottom: 1px; border-bottom: 1px solid transparent;
+      color: var(--accent1);
+      font-size: 0.88rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
       transition: border-color var(--transition);
     }
-    .contact-row a:hover { border-color: var(--accent1); }
+
+    .contact-row a:hover {
+      border-color: var(--accent1);
+    }
 
     /* ===================== NAV GRID ===================== */
     .nav-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-      gap: 14px; max-width: 800px; width: 100%; padding: 0 8px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      width: 100%;
+      padding: 0 10px;
     }
+
     .nav-card {
       background: var(--glass-strong);
       backdrop-filter: blur(24px) saturate(200%);
@@ -212,74 +399,275 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius);
       padding: 22px 18px 20px;
-      cursor: pointer; text-decoration: none; color: var(--text);
-      box-shadow: 0 4px 20px rgba(80,100,180,0.09), 0 1px 0 rgba(255,255,255,0.9) inset;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(80, 100, 180, 0.09), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
       transition: transform var(--transition), box-shadow var(--transition);
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+
     .nav-card::after {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 60%);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
       pointer-events: none;
     }
+
     .nav-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(80,100,200,0.18), 0 1px 0 rgba(255,255,255,0.95) inset;
+      box-shadow: 0 16px 40px rgba(80, 100, 200, 0.18), 0 1px 0 rgba(255, 255, 255, 0.95) inset;
     }
+
     .nav-icon-wrap {
-      width: 40px; height: 40px; border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       background: linear-gradient(135deg, var(--c1), var(--c2));
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
     }
-    .nav-icon-wrap svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.8; }
-    .nav-label { font-weight: 700; font-size: 0.96rem; margin-bottom: 3px; }
-    .nav-hint  { font-size: 0.76rem; color: var(--muted); }
+
+    .nav-icon-wrap svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .nav-label {
+      font-weight: 700;
+      font-size: 0.96rem;
+      margin-bottom: 3px;
+    }
+
+    .nav-hint {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    /* ===================== SIDEBAR NAV ===================== */
+    .sidebar {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 220px;
+      background: var(--sidebar-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-right: 1px solid var(--sidebar-border);
+      box-shadow: 4px 0 24px rgba(80, 100, 180, 0.08);
+      z-index: 200;
+      padding: 32px 0;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(.4, 0, .2, 1);
+      overflow-y: auto;
+    }
+
+    .sidebar.visible {
+      display: flex;
+    }
+
+    .sidebar-header {
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--sidebar-border);
+      margin-bottom: 16px;
+    }
+
+    .sidebar-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 10px;
+      border: 2px solid rgba(96, 165, 250, 0.5);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.6);
+    }
+
+    .sidebar-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .sidebar-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .sidebar-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 0 12px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all var(--transition);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+      text-decoration: none;
+    }
+
+    .sidebar-item:hover,
+    .sidebar-item.active {
+      background: rgba(59, 130, 246, 0.10);
+      color: var(--accent1);
+    }
+
+    .sidebar-item.active {
+      background: rgba(59, 130, 246, 0.14);
+      font-weight: 700;
+    }
+
+    .sidebar-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+    }
+
+    .sidebar-footer {
+      padding: 18px 20px 0;
+      border-top: 1px solid var(--sidebar-border);
+      margin-top: 12px;
+    }
+
+    .sidebar-footer-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: all var(--transition);
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    .sidebar-footer-btn:hover {
+      background: rgba(99, 102, 241, 0.08);
+      color: var(--accent2);
+    }
+
+    /* Main content shifted when sidebar visible */
+    .page.has-sidebar {
+      margin-left: 220px;
+    }
 
     /* ===================== SECTIONS ===================== */
     .section {
-      display: none; min-height: 100vh;
+      display: none;
+      min-height: 100vh;
       padding: 72px 24px 80px;
-      max-width: 880px; margin: 0 auto;
+      max-width: 880px;
+      margin: 0 auto;
       animation: fadeUp 0.42s ease both;
     }
-    .section.active { display: block; }
+
+    .section.active {
+      display: block;
+    }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Back */
     .back-btn {
-      display: inline-flex; align-items: center; gap: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       background: var(--glass-strong);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-radius: 100px; padding: 7px 18px;
-      color: var(--accent1); font-size: 0.82rem; cursor: pointer;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      box-shadow: 0 2px 10px rgba(80,100,180,0.10);
+      border-radius: 100px;
+      padding: 7px 18px;
+      color: var(--accent1);
+      font-size: 0.82rem;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(80, 100, 180, 0.10);
       margin-bottom: 40px;
       transition: transform var(--transition), box-shadow var(--transition);
     }
-    .back-btn:hover { transform: translateX(-3px); box-shadow: 0 4px 18px rgba(80,100,180,0.16); }
-    .back-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.2; }
+
+    .back-btn:hover {
+      transform: translateX(-3px);
+      box-shadow: 0 4px 18px rgba(80, 100, 180, 0.16);
+    }
+
+    .back-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+    }
 
     /* Section header */
     .sec-tag {
-      display: inline-block; font-size: 0.7rem; text-transform: uppercase;
-      letter-spacing: 0.16em; color: var(--accent1);
-      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 100px; padding: 3px 12px; margin-bottom: 12px;
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent1);
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 100px;
+      padding: 3px 12px;
+      margin-bottom: 12px;
     }
+
     .sec-title {
-      font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.2;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
       background: linear-gradient(120deg, #1e3a8a, #6366f1);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; margin-bottom: 36px;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 36px;
     }
 
     /* ===================== CARD ===================== */
@@ -291,785 +679,1295 @@
       border-radius: var(--radius);
       padding: 26px 28px;
       margin-bottom: 18px;
-      box-shadow: 0 4px 24px rgba(80,100,180,0.08), 0 1px 0 rgba(255,255,255,0.85) inset;
-      position: relative; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(80, 100, 180, 0.08), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+      position: relative;
+      overflow: hidden;
       transition: transform var(--transition), box-shadow var(--transition);
     }
+
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(80,100,200,0.13), 0 1px 0 rgba(255,255,255,0.9) inset;
+      box-shadow: 0 12px 36px rgba(80, 100, 200, 0.13), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
     }
+
     .card-shine {
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
     }
+
     .card-bar {
-      position: absolute; left: 0; top: 0; bottom: 0; width: 3.5px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3.5px;
       border-radius: 4px 0 0 4px;
     }
 
-    .card-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
-    .card-meta  { font-size: 0.82rem; color: var(--muted); }
-    .card-body  { font-size: 0.88rem; color: var(--muted); margin-top: 12px; line-height: 1.85; }
-    .card-contrib {
-      font-size: 0.8rem; color: #6b7280; margin-top: 12px;
-      padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06);
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
     }
-    .flex-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    .card-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .card-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 12px;
+      line-height: 1.85;
+    }
+
+    .card-contrib {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .flex-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
     /* ===================== BADGES ===================== */
     .badge {
-      display: inline-block; font-size: 0.7rem; letter-spacing: 0.05em;
-      padding: 3px 10px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
       font-weight: 600;
     }
-    .b-blue   { background: rgba(59,130,246,0.12);  color: #2563eb; border: 1px solid rgba(59,130,246,0.22); }
-    .b-indigo { background: rgba(99,102,241,0.12);  color: #4f46e5; border: 1px solid rgba(99,102,241,0.22); }
-    .b-violet { background: rgba(139,92,246,0.12);  color: #7c3aed; border: 1px solid rgba(139,92,246,0.22); }
-    .b-gold   { background: rgba(217,119,6,0.10);   color: #b45309; border: 1px solid rgba(217,119,6,0.20); }
-    .b-green  { background: rgba(16,185,129,0.10);  color: #059669; border: 1px solid rgba(16,185,129,0.20); }
-    .b-rose   { background: rgba(244,63,94,0.10);   color: #e11d48; border: 1px solid rgba(244,63,94,0.20); }
 
-    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .b-blue {
+      background: rgba(59, 130, 246, 0.12);
+      color: #2563eb;
+      border: 1px solid rgba(59, 130, 246, 0.22);
+    }
+
+    .b-indigo {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4f46e5;
+      border: 1px solid rgba(99, 102, 241, 0.22);
+    }
+
+    .b-violet {
+      background: rgba(139, 92, 246, 0.12);
+      color: #7c3aed;
+      border: 1px solid rgba(139, 92, 246, 0.22);
+    }
+
+    .b-gold {
+      background: rgba(217, 119, 6, 0.10);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.20);
+    }
+
+    .b-green {
+      background: rgba(16, 185, 129, 0.10);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.20);
+    }
+
+    .b-rose {
+      background: rgba(244, 63, 94, 0.10);
+      color: #e11d48;
+      border: 1px solid rgba(244, 63, 94, 0.20);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
 
     /* ===================== STAT TILES ===================== */
-    .stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-    .stat-tile {
-      flex: 1; min-width: 80px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(255,255,255,0.9);
-      border-radius: 12px; padding: 14px 12px; text-align: center;
-      box-shadow: 0 2px 10px rgba(80,100,180,0.07);
+    .stat-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
     }
+
+    .stat-tile {
+      flex: 1;
+      min-width: 80px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(80, 100, 180, 0.07);
+    }
+
     .stat-val {
-      font-size: 1.25rem; font-weight: 800;
+      font-size: 1.25rem;
+      font-weight: 800;
       background: linear-gradient(120deg, var(--accent1), var(--accent3));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .stat-lbl { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+
+    .stat-lbl {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
 
     /* ===================== TIMELINE ===================== */
-    .timeline { padding-left: 26px; position: relative; }
+    .timeline {
+      padding-left: 26px;
+      position: relative;
+    }
+
     .timeline::before {
       content: '';
-      position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px;
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
       background: linear-gradient(to bottom, #60a5fa, #c084fc, transparent);
       border-radius: 2px;
     }
-    .tl-item { position: relative; margin-bottom: 22px; }
-    .tl-dot {
-      position: absolute; left: -23px; top: 7px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--accent1);
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.9), 0 0 10px rgba(96,165,250,0.5);
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 22px;
     }
-    .tl-date { font-size: 0.76rem; color: var(--accent1); font-weight: 600; margin-bottom: 5px; letter-spacing: 0.04em; }
+
+    .tl-dot {
+      position: absolute;
+      left: -23px;
+      top: 7px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent1);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9), 0 0 10px rgba(96, 165, 250, 0.5);
+    }
+
+    .tl-date {
+      font-size: 0.76rem;
+      color: var(--accent1);
+      font-weight: 600;
+      margin-bottom: 5px;
+      letter-spacing: 0.04em;
+    }
 
     /* ===================== AWARDS LIST ===================== */
     .award-row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
-    .award-row:last-child { border-bottom: none; }
+
+    .award-row:last-child {
+      border-bottom: none;
+    }
+
     .award-dot {
-      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
-    .award-text { flex: 1; font-size: 0.92rem; }
-    .award-year { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+    .award-text {
+      flex: 1;
+      font-size: 0.92rem;
+    }
+
+    .award-year {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
     /* ===================== PUB ===================== */
-    .pub-entry { display: flex; gap: 14px; align-items: flex-start; }
+    .pub-entry {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
     .pub-num {
-      width: 26px; height: 26px; border-radius: 50%;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 800; color: #fff; flex-shrink: 0; margin-top: 1px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
 
     /* ===================== SKILLS ===================== */
-    .skill-block { margin-bottom: 22px; }
-    .skill-label {
-      font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--accent2); font-weight: 700; margin-bottom: 10px;
+    .skill-block {
+      margin-bottom: 22px;
     }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .skill-label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent2);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .skill-tag {
-      font-size: 0.82rem; padding: 5px 14px;
-      background: rgba(255,255,255,0.75);
-      border: 1px solid rgba(255,255,255,0.95);
-      border-radius: 8px; color: var(--text);
-      box-shadow: 0 1px 4px rgba(80,100,180,0.07);
+      font-size: 0.82rem;
+      padding: 5px 14px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(80, 100, 180, 0.07);
       transition: transform var(--transition), box-shadow var(--transition);
       cursor: default;
     }
+
     .skill-tag:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(80,100,200,0.13);
-      border-color: rgba(99,102,241,0.3);
+      box-shadow: 0 4px 14px rgba(80, 100, 200, 0.13);
+      border-color: rgba(99, 102, 241, 0.3);
       color: var(--accent2);
     }
 
-    .divider { height: 1px; background: rgba(0,0,0,0.06); margin: 14px 0; }
+    .divider {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.06);
+      margin: 14px 0;
+    }
+
+    /* ===================== MODAL ===================== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 85%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .modal.show .modal-content {
+      transform: scale(1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+      z-index: 10000;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #ccc;
+      transform: scale(1.1);
+    }
 
     /* ===================== SCROLLBAR ===================== */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.25); border-radius: 3px; }
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.25);
+      border-radius: 3px;
+    }
+
+    /* ===================== CLICKABLE HINT ===================== */
+    .clickable-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: var(--accent1);
+      margin-top: 10px;
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    /* ===================== PRINT STYLES ===================== */
+    @media print {
+      .sidebar, .top-bar, .back-btn, #reading-progress, .blob-stage { display: none !important; }
+      .page.has-sidebar { margin-left: 0 !important; }
+      .section { display: block !important; page-break-inside: avoid; }
+      .hero { min-height: auto; padding: 40px 24px 30px; }
+      body { background: #fff; }
+      .card { box-shadow: none; border: 1px solid #e2e8f0; }
+    }
 
     /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-220px);
+      }
+      .sidebar.modal-open {
+        transform: translateX(0);
+      }
+      .page.has-sidebar {
+        margin-left: 0;
+      }
+    }
+
     @media (max-width: 580px) {
-      .nav-grid { grid-template-columns: repeat(2, 1fr); }
-      .card { padding: 20px 18px; }
+      .nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card {
+        padding: 20px 18px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ===== MOVING LIGHT BLOBS ===== -->
-<div class="blob-stage">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="blob b4"></div>
-  <div class="blob b5"></div>
-</div>
+  <!-- ===== READING PROGRESS ===== -->
+  <div id="reading-progress"></div>
 
-<div class="page">
+  <!-- ===== MOVING LIGHT BLOBS ===== -->
+  <div class="blob-stage">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+    <div class="blob b5"></div>
+  </div>
 
-  <!-- ==================== HERO ==================== -->
- <section id="hero" class="hero">
-    <div class="top-bar">
-      <div class="welcome-msg" id="welcomeMsg">✨ 欢迎来到我的个人网页，希望能与您多多交流！</div>
-      <button class="interactive-btn" onclick="pokeMe()">戳我一下 👆</button>
-    </div>
-    
-<div class="avatar-ring" style="overflow: hidden; padding: 0;">
-      <img 
-        src="avatar.png" 
-        alt="黄安东" 
-        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"
-        onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=Huang&backgroundColor=60a5fa&textColor=ffffff';" 
-      />
+  <!-- ===== SIDEBAR NAV ===== -->
+  <aside class="sidebar visible" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-avatar">
+        <img src="avatar.png" alt="黄安东"
+          onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=Huang&backgroundColor=60a5fa&textColor=ffffff';" />
+      </div>
+      <div class="sidebar-name">黄安东</div>
+      <div class="sidebar-sub">临床医学 · 麻醉学方向</div>
     </div>
 
-    <h1 class="hero-name">黄安东</h1>
-    <p class="hero-sub">临床医学 · 麻醉学方向 · 科研型医学生</p>
-    <p class="hero-desc">广州医科大学 第二临床学院 &nbsp;|&nbsp; 绩点排名 3/67 &nbsp;|&nbsp; 综合测评 2/67</p>
-    <div class="contact-row">
-      <a href="tel:+8615918400341">(+86) 159-1840-0341</a>
-      <a href="mailto:had785387047@gmail.com">had785387047@Gmail.com</a>
-    </div>
-
-    <nav class="nav-grid">
-
-      <a class="nav-card" href="#" onclick="showSection('edu'); return false;"
-         style="--c1:#60a5fa;--c2:#3b82f6">
-        <div class="nav-icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-        </div>
-        <div class="nav-label">教育背景</div>
-        <div class="nav-hint">学业成绩 · 核心课程</div>
+    <nav class="sidebar-nav">
+      <a class="sidebar-item active" id="nav-home" onclick="showHero(); setSidebarActive('nav-home')" href="#">
+        <span class="sidebar-icon">🏠</span> 主页
       </a>
-
-      <a class="nav-card" href="#" onclick="showSection('research'); return false;"
-         style="--c1:#818cf8;--c2:#6366f1">
-        <div class="nav-icon-wrap">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <div class="nav-label">科研经历</div>
-        <div class="nav-hint">课题组 · 项目立项</div>
+      <a class="sidebar-item" id="nav-edu" onclick="showSection('edu'); setSidebarActive('nav-edu')" href="#">
+        <span class="sidebar-icon">🎓</span> 教育背景
       </a>
-
-      <a class="nav-card" href="#" onclick="showSection('pub'); return false;"
-         style="--c1:#a78bfa;--c2:#8b5cf6">
-        <div class="nav-icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <div class="nav-label">科研成果</div>
-        <div class="nav-hint">SCI 论文 · 期刊发表</div>
+      <a class="sidebar-item" id="nav-research" onclick="showSection('research'); setSidebarActive('nav-research')" href="#">
+        <span class="sidebar-icon">🔬</span> 科研经历
       </a>
-
-      <a class="nav-card" href="#" onclick="showSection('comp'); return false;"
-         style="--c1:#f59e0b;--c2:#d97706">
-        <div class="nav-icon-wrap">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-        </div>
-        <div class="nav-label">学科竞赛</div>
-        <div class="nav-hint">国家级 · 省级奖项</div>
+      <a class="sidebar-item" id="nav-pub" onclick="showSection('pub'); setSidebarActive('nav-pub')" href="#">
+        <span class="sidebar-icon">📄</span> 科研成果
       </a>
-
-      <a class="nav-card" href="#" onclick="showSection('award'); return false;"
-         style="--c1:#fb923c;--c2:#ea580c">
-        <div class="nav-icon-wrap">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <div class="nav-label">荣誉奖项</div>
-        <div class="nav-hint">国奖 · 优秀学生</div>
+      <a class="sidebar-item" id="nav-comp" onclick="showSection('comp'); setSidebarActive('nav-comp')" href="#">
+        <span class="sidebar-icon">🏆</span> 学科竞赛
       </a>
-
-      <a class="nav-card" href="#" onclick="showSection('skill'); return false;"
-         style="--c1:#34d399;--c2:#059669">
-        <div class="nav-icon-wrap">
-          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <div class="nav-label">技能专长</div>
-        <div class="nav-hint">实验 · 编程 · 临床</div>
+      <a class="sidebar-item" id="nav-award" onclick="showSection('award'); setSidebarActive('nav-award')" href="#">
+        <span class="sidebar-icon">⭐</span> 荣誉奖项
       </a>
-
+      <a class="sidebar-item" id="nav-skill" onclick="showSection('skill'); setSidebarActive('nav-skill')" href="#">
+        <span class="sidebar-icon">💡</span> 技能专长
+      </a>
     </nav>
-  </section>
 
-  <!-- ==================== EDUCATION ==================== -->
-  <section id="edu" class="section">
-    <button class="back-btn" onclick="showHero()">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      返回主页
-    </button>
-    <span class="sec-tag">Education</span>
-    <h2 class="sec-title">教育背景</h2>
+    <div class="sidebar-footer">
+      <button class="sidebar-footer-btn" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span> 切换主题
+      </button>
+      <button class="sidebar-footer-btn" onclick="window.print()">
+        <span>🖨️</span> 打印简历
+      </button>
+      <button class="sidebar-footer-btn" onclick="copyContact()">
+        <span>📋</span> 复制联系方式
+      </button>
+    </div>
+  </aside>
 
-<div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
-      
-      <img 
-        src="comp_tiaozhanbei.png" 
-        alt="挑战杯" 
-        style="width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.05);"
-        onerror="this.onerror=null; this.src='https://via.placeholder.com/600x140/fef3c7/d97706?text=Image+Not+Found';" 
-      />
+  <div class="page has-sidebar" id="main-page">
 
-      <div class="flex-head">
-        <div>
-          <div class="card-title">广州医科大学 · 第二临床学院</div>
-          <div class="card-meta">临床医学 — 麻醉学方向 &nbsp;|&nbsp; 2022.09 — 至今</div>
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="hero">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <div class="welcome-msg" id="welcomeMsg">✨ 欢迎来到我的个人网页，希望能与您多多交流！</div>
         </div>
-        <span class="badge b-blue">在读</span>
+        <div class="top-bar-right">
+          <button class="interactive-btn" onclick="pokeMe()">戳我一下 👆</button>
+          <button class="theme-btn" onclick="toggleTheme()" title="切换主题" id="themeBtnHero">🌙</button>
+        </div>
       </div>
-      <div class="stat-row">
-        <div class="stat-tile"><div class="stat-val">3.93<span style="font-size:.65rem;color:var(--muted)">/5</span></div><div class="stat-lbl">GPA</div></div>
-        <div class="stat-tile"><div class="stat-val">3<span style="font-size:.65rem;color:var(--muted)">/67</span></div><div class="stat-lbl">绩点排名</div></div>
-        <div class="stat-tile"><div class="stat-val">2<span style="font-size:.65rem;color:var(--muted)">/67</span></div><div class="stat-lbl">综合测评</div></div>
-        <div class="stat-tile"><div class="stat-val" style="font-size:1rem">CET-6</div><div class="stat-lbl">英语水平</div></div>
+
+      <div class="avatar-ring" style="overflow: hidden; padding: 0;">
+        <img src="avatar.png" alt="黄安东" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"
+          onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=Huang&backgroundColor=60a5fa&textColor=ffffff';" />
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
-      <div class="card-title" style="margin-bottom:16px">核心课程成绩</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px">
-        <div class="stat-tile"><div class="stat-val">97</div><div class="stat-lbl">生理学</div></div>
-        <div class="stat-tile"><div class="stat-val">97</div><div class="stat-lbl">病理学</div></div>
-        <div class="stat-tile"><div class="stat-val">96</div><div class="stat-lbl">药理学</div></div>
-        <div class="stat-tile"><div class="stat-val">95</div><div class="stat-lbl">实验诊断学</div></div>
-        <div class="stat-tile"><div class="stat-val">94</div><div class="stat-lbl">生物化学</div></div>
-        <div class="stat-tile"><div class="stat-val">94</div><div class="stat-lbl">病理生理学</div></div>
+      <h1 class="hero-name">黄安东</h1>
+      <p class="hero-sub">临床医学 · 麻醉学方向 · 科研型医学生</p>
+      <p class="hero-desc">广州医科大学 第二临床学院 &nbsp;|&nbsp; 绩点排名 3/67 &nbsp;|&nbsp; 综合测评 2/67</p>
+      <div class="contact-row">
+        <a href="tel:+8615918400341">(+86) 159-1840-0341</a>
+        <a href="mailto:had785387047@gmail.com">had785387047@Gmail.com</a>
       </div>
-    </div>
-  </section>
 
-  <!-- ==================== RESEARCH ==================== -->
-  <section id="research" class="section">
-    <button class="back-btn" onclick="showHero()">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回主页
-    </button>
-    <span class="sec-tag">Research</span>
-    <h2 class="sec-title">科研经历</h2>
+      <nav class="nav-grid">
 
-    <div class="timeline">
+        <a class="nav-card" href="#" onclick="showSection('edu'); return false;" style="--c1:#60a5fa;--c2:#3b82f6">
+          <div class="nav-icon-wrap">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <polyline points="2 17 12 22 22 17" />
+              <polyline points="2 12 12 17 22 12" />
+            </svg>
+          </div>
+          <div class="nav-label">教育背景</div>
+          <div class="nav-hint">学业成绩 · 核心课程</div>
+        </a>
 
-      <div class="tl-item">
-        <div class="tl-dot" style="background:#34d399;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 10px rgba(52,211,153,.5)"></div>
-        <div class="tl-date">2025 — 至今</div>
-        <div class="card">
-          <div class="card-shine"></div>
-          <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
-          <div class="flex-head">
-            <div>
-              <div class="card-title">中山大学公共卫生学院 · 张王剑教授课题组</div>
-              <div class="card-meta">环境流行病学 · 科研学习</div>
+        <a class="nav-card" href="#" onclick="showSection('research'); return false;" style="--c1:#818cf8;--c2:#6366f1">
+          <div class="nav-icon-wrap">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <div class="nav-label">科研经历</div>
+          <div class="nav-hint">课题组 · 项目立项</div>
+        </a>
+
+        <a class="nav-card" href="#" onclick="showSection('pub'); return false;" style="--c1:#a78bfa;--c2:#8b5cf6">
+          <div class="nav-icon-wrap">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </div>
+          <div class="nav-label">科研成果</div>
+          <div class="nav-hint">SCI 论文 · 期刊发表</div>
+        </a>
+
+        <a class="nav-card" href="#" onclick="showSection('comp'); return false;" style="--c1:#f59e0b;--c2:#d97706">
+          <div class="nav-icon-wrap">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="6" />
+              <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+            </svg>
+          </div>
+          <div class="nav-label">学科竞赛</div>
+          <div class="nav-hint">国家级 · 省级奖项</div>
+        </a>
+
+        <a class="nav-card" href="#" onclick="showSection('award'); return false;" style="--c1:#fb923c;--c2:#ea580c">
+          <div class="nav-icon-wrap">
+            <svg viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <div class="nav-label">荣誉奖项</div>
+          <div class="nav-hint">国奖 · 优秀学生</div>
+        </a>
+
+        <a class="nav-card" href="#" onclick="showSection('skill'); return false;" style="--c1:#34d399;--c2:#059669">
+          <div class="nav-icon-wrap">
+            <svg viewBox="0 0 24 24">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+          </div>
+          <div class="nav-label">技能专长</div>
+          <div class="nav-hint">实验 · 编程 · 临床</div>
+        </a>
+
+      </nav>
+    </section>
+
+    <!-- ==================== EDUCATION ==================== -->
+    <section id="edu" class="section">
+      <button class="back-btn" onclick="showHero()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        返回主页
+      </button>
+      <span class="sec-tag">Education</span>
+      <h2 class="sec-title">教育背景</h2>
+
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
+
+        <div class="flex-head">
+          <div>
+            <div class="card-title">广州医科大学 · 第二临床学院</div>
+            <div class="card-meta">临床医学 — 麻醉学方向 &nbsp;|&nbsp; 2022.09 — 至今</div>
+          </div>
+          <span class="badge b-blue">在读</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat-tile">
+            <div class="stat-val">3.93<span style="font-size:.65rem;color:var(--muted)">/5</span></div>
+            <div class="stat-lbl">GPA</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">3<span style="font-size:.65rem;color:var(--muted)">/67</span></div>
+            <div class="stat-lbl">绩点排名</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">2<span style="font-size:.65rem;color:var(--muted)">/67</span></div>
+            <div class="stat-lbl">综合测评</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val" style="font-size:1rem">CET-6</div>
+            <div class="stat-lbl">英语水平</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
+        <div class="card-title" style="margin-bottom:16px">核心课程成绩</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px">
+          <div class="stat-tile">
+            <div class="stat-val">97</div>
+            <div class="stat-lbl">生理学</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">97</div>
+            <div class="stat-lbl">病理学</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">96</div>
+            <div class="stat-lbl">药理学</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">95</div>
+            <div class="stat-lbl">实验诊断学</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">94</div>
+            <div class="stat-lbl">生物化学</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-val">94</div>
+            <div class="stat-lbl">病理生理学</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== RESEARCH ==================== -->
+    <section id="research" class="section">
+      <button class="back-btn" onclick="showHero()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>返回主页
+      </button>
+      <span class="sec-tag">Research</span>
+      <h2 class="sec-title">科研经历</h2>
+
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"
+            style="background:#34d399;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 10px rgba(52,211,153,.5)"></div>
+          <div class="tl-date">2025 — 至今</div>
+          <div class="card">
+            <div class="card-shine"></div>
+            <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
+            <div class="flex-head">
+              <div>
+                <div class="card-title">中山大学公共卫生学院 · 张王剑教授课题组</div>
+                <div class="card-meta">环境流行病学 · 科研学习</div>
+              </div>
+              <span class="badge b-green">进行中</span>
             </div>
-            <span class="badge b-green">进行中</span>
+            <p class="card-body">专注于大气污染物（PM2.5 组分）与心血管、代谢疾病死亡率的长期因果关联研究，综合运用因果推断统计建模、面板数据分析及多维健康不平等探索。</p>
           </div>
-          <p class="card-body">专注于大气污染物（PM2.5 组分）与心血管、代谢疾病死亡率的长期因果关联研究，综合运用因果推断统计建模、面板数据分析及多维健康不平等探索。</p>
         </div>
-      </div>
 
-      <div class="tl-item">
-        <div class="tl-dot" style="background:#a78bfa;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 10px rgba(167,139,250,.5)"></div>
-        <div class="tl-date">2023 — 2024</div>
-        <div class="card">
-          <div class="card-shine"></div>
-          <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
-          <div class="flex-head">
-            <div>
-              <div class="card-title">中法霍夫曼免疫研究所 · 师宪平教授课题组</div>
-              <div class="card-meta">肿瘤转录调控与靶向治疗</div>
+        <div class="tl-item">
+          <div class="tl-dot"
+            style="background:#a78bfa;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 10px rgba(167,139,250,.5)"></div>
+          <div class="tl-date">2023 — 2024</div>
+          <div class="card">
+            <div class="card-shine"></div>
+            <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
+            <div class="flex-head">
+              <div>
+                <div class="card-title">中法霍夫曼免疫研究所 · 师宪平教授课题组</div>
+                <div class="card-meta">肿瘤转录调控与靶向治疗</div>
+              </div>
+              <span class="badge b-indigo">已完成</span>
             </div>
-            <span class="badge b-indigo">已完成</span>
+            <p class="card-body">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、 物模型等多项实验工作，并以第二作者身份参与发表
+              Advanced Science 论文。</p>
           </div>
-          <p class="card-body">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、   物模型等多项实验工作，并以第二作者身份参与发表 Advanced Science 论文。</p>
         </div>
-      </div>
 
-      <div class="tl-item">
-        <div class="tl-dot" style="background:#f59e0b;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 10px rgba(245,158,11,.5)"></div>
-        <div class="tl-date">2022 — 2023</div>
-        <div class="card">
-          <div class="card-shine"></div>
-          <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
-          <div class="flex-head">
-            <div>
-              <div class="card-title">广州医科大学青年志愿者协会</div>
-              <div class="card-meta">部长 · 学院科研部干事</div>
+        <div class="tl-item">
+          <div class="tl-dot"
+            style="background:#f59e0b;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 10px rgba(245,158,11,.5)"></div>
+          <div class="tl-date">2022 — 2023</div>
+          <div class="card">
+            <div class="card-shine"></div>
+            <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
+            <div class="flex-head">
+              <div>
+                <div class="card-title">广州医科大学青年志愿者协会</div>
+                <div class="card-meta">部长 · 学院科研部干事</div>
+              </div>
+              <span class="badge b-gold">已完成</span>
             </div>
-            <span class="badge b-gold">已完成</span>
-          </div>
-          <p class="card-body">统筹部门工作，推动科研文化建设与学生科研活动组织开展；2023 年获评惠州市青年大学生"百千万工程"突击队行动优秀队伍。</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:8px">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#34d399)"></div>
-      <div class="card-title" style="margin-bottom:16px">项目立项</div>
-      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
-        <span class="badge b-blue" style="margin-top:2px;flex-shrink:0">省级</span>
-        <div>
-          <div style="font-size:.9rem;font-weight:600">《核心转录调控环路驱动非小细胞肺癌奥西替尼耐药的作用与机制研究》</div>
-          <div style="font-size:.78rem;color:var(--muted);margin-top:2px">负责人</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div style="display:flex;gap:10px;align-items:flex-start">
-        <span class="badge b-indigo" style="margin-top:2px;flex-shrink:0">校级</span>
-        <div>
-          <div style="font-size:.9rem;font-weight:600">《超级增强子驱动SOX4/SMAD3互作介导质膜重塑促进慢粒白血病急髓变的作用机制研究》</div>
-          <div style="font-size:.78rem;color:var(--muted);margin-top:2px">成员</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PUBLICATIONS ==================== -->
-  <section id="pub" class="section">
-    <button class="back-btn" onclick="showHero()">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回主页
-    </button>
-    <span class="sec-tag">Publications</span>
-    <h2 class="sec-title">科研成果</h2>
-
-    <div class="stat-row" style="margin-bottom:32px">
-      <div class="stat-tile"><div class="stat-val">7+</div><div class="stat-lbl">已发表/在审</div></div>
-      <div class="stat-tile"><div class="stat-val">9</div><div class="stat-lbl">在投文章</div></div>
-      <div class="stat-tile"><div class="stat-val">3</div><div class="stat-lbl">第一作者</div></div>
-      <div class="stat-tile"><div class="stat-val">5+</div><div class="stat-lbl">一区 TOP</div></div>
-    </div>
-
-    <!-- P1 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#60a5fa,#818cf8)">1</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">A non-canonical core transcriptional regulatory circuit orchestrates chromatin reprogramming to drive Osimertinib resistance in non-small cell lung cancer</div>
-          <div class="badge-row">
-            <span class="badge b-blue">Advanced Science</span>
-            <span class="badge b-gold">中科院一区 TOP · IF 14.1</span>
-            <span class="badge b-indigo">第二作者</span>
-            <span class="badge b-rose">Under Revision</span>
-          </div>
-          <p class="card-body">发现由多分子协同驱动的非经典核心转录调控网络介导非小细胞肺癌奥西替尼耐药；揭示辅因子稳固转录复合体、驱动肿瘤神经内分泌分化及抑制铁死亡的分子机制；验证双靶点联合抑制方案可有效逆转耐药，提供新型联合用药策略。</p>
-          <div class="card-contrib">个人贡献：科研概念图绘制、方法学撰写、Figure Legend；通路分析、药物联用、分子对接及可视化；Western Blot、流式细胞术、动物灌胃模型</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- P2 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#818cf8,#c084fc)">2</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">Super-enhancer-driven SOX4/SMAD3 mediate membrane remodeling by regulating phospholipid metabolism to accelerate leukemia progression</div>
-          <div class="badge-row">
-            <span class="badge b-blue">Advanced Science</span>
-            <span class="badge b-gold">中科院一区 TOP · IF 14.1</span>
-            <span class="badge b-violet">核心成员</span>
-            <span class="badge b-green">已发表</span>
-          </div>
-          <p class="card-body">揭示超级增强子驱动 SOX4/SMAD3 正反馈环路，共同激活 AXL/LPCAT1 轴增强 AKT/ERK/STAT5 信号，  速慢粒白血病向急变期进展；证实 Bemcentinib 靶向 AXL 可显著抑制 CML-BP，提供新治疗策略。</p>
-          <div class="card-contrib">个人贡献：Western Blot、数据分析及可视化</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- P3 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#34d399,#60a5fa)">3</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">Nationwide Causal Effects of PM2.5 Component Mixture on Ischemic Heart Disease Mortality in the United States, 2000–2019</div>
-          <div class="badge-row">
-            <span class="badge b-blue">Ecotoxicology and Environmental Safety</span>
-            <span class="badge b-gold">中   院小类一区 · IF 6.1</span>
-            <span class="badge b-green">第一作者</span>
-            <span class="badge b-rose">Under Revision</span>
-          </div>
-          <p class="card-body">利用美国 20 年全国县级面板数据，系统探究 PM2.5 化学组分混合物对缺血性心脏病死亡率的长期因果关联；明确硫酸盐与硝酸盐的主导权重；揭示种族、经济与气候维度的健康不平等现象，为靶向减排公共卫生干预提供依据。</p>
-          <div class="card-contrib">个人贡献：核心数据收集（空气网格、死亡结局）、爬虫代码编写、可视化、全文与 Cover Letter 撰写</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- P4 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#fbbf24,#f97316)">4</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">Causal Effects of PM2.5 Component Mixture on Endocrine, Nutritional, and Metabolic Disease Mortality: Evidence from a Nationwide U.S. Study</div>
-          <div class="badge-row">
-            <span class="badge b-blue">Environment International</span>
-            <span class="badge b-gold">SCI 一区 TOP · IF 9.7</span>
-            <span class="badge b-green">第一作者</span>
-            <span class="badge b-rose">Under Review</span>
+            <p class="card-body">统筹部门工作，推动科研文化建设与学生科研活动组织开展；2023 年获评惠州市青年大学生"百千万工程"突击队行动优秀队伍。</p>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- P5 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#f0abfc,#a78bfa)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#f0abfc,#a78bfa)">5</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">Silicified curcumin microspheres Combats cardiovascular diseases via Nrf2/HO-1 pathway</div>
-          <div class="badge-row">
-            <span class="badge b-blue">Bioactive Materials</span>
-            <span class="badge b-gold">中科院一区 TOP · IF 20.3</span>
-            <span class="badge b-violet">核心成员</span>
-            <span class="badge b-green">已发表</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- P6 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#67e8f9,#60a5fa)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#67e8f9,#3b82f6)">6</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">Development of the Retinal Senescence Protein Signature Based on Proteomics to Evaluate the Progression of Diabetic Retinopathy</div>
-          <div class="badge-row">
-            <span class="badge b-blue">Visual Neuroscience</span>
-            <span class="badge b-indigo">Q2 · IF 6.18</span>
-            <span class="badge b-green">第一作者 · 已发表</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- P7 -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#fda4af,#f43f5e)"></div>
-      <div class="pub-entry">
-        <div class="pub-num" style="background:linear-gradient(135deg,#fda4af,#f43f5e)">7</div>
-        <div style="flex:1">
-          <div class="card-title" style="line-height:1.5">Global Patterns and Individual Risk Phenotypes of Cardiovascular Disease in Thoracic Malignancy: Analysis of Global Burden of Disease 2021 and UK Biobank</div>
-          <div class="badge-row">
-            <span class="badge b-violet">中科院三区 Q2 · IF 2.4</span>
-            <span class="badge b-blue">第二作者</span>
-            <span class="badge b-rose">Under Review</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- In pipeline -->
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#94a3b8,#cbd5e1)"></div>
-      <div class="card-title" style="margin-bottom:12px">在投文章（9 篇）</div>
-      <div class="badge-row">
-        <span class="badge b-blue">一区 TOP 核心成员 × 5</span>
-        <span class="badge b-indigo">三区第一作者 × 2</span>
-        <span class="badge b-violet">三区核心成员 × 2</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== COMPETITIONS ==================== -->
-  <section id="comp" class="section">
-    <button class="back-btn" onclick="showHero()">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回主页
-    </button>
-    <span class="sec-tag">Competitions</span>
-    <h2 class="sec-title">学科竞赛</h2>
-
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
-      <div class="flex-head">
-        <div>
-          <div class="card-title">第二十届挑战杯"揭榜挂帅"专项赛</div>
-          <div class="card-meta">负责人</div>
-        </div>
-        <span class="badge b-gold">国家级优秀奖</span>
-      </div>
-      <p class="card-body">开发《基于深度学习及优化算法的中药多组分智能均化系统》，集成 CTGAN 数据扩充、LightGBM 质量评分模型及双引擎优化算法（SLSQP + NSGA-II），在多重约束下智能计算最优中药混批配比，实现从"经验试错"到"数据预测"的智能决策转变。</p>
-      <div class="card-contrib">统筹整体架构 · 主导 LightGBM 模型构建 · 设计"小药 LLM"交互界面 · 独立构建前端可运行网页 · 推动软著申请与成果落地</div>
-    </div>
-
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
-      <div class="flex-head">
-        <div>
-          <div class="card-title">2024 年广东省生物化学实验技能大赛</div>
-          <div class="card-meta">负责人</div>
-        </div>
-        <span class="badge b-blue">省级一等奖</span>
-      </div>
-      <p class="card-body">鉴定 SOX4 为驱动 CML 急变的关键靶点，首次验证"老药新用"策略——证实二甲双胍靶向下调 SOX4，与伊马替尼联用产生显著协同杀伤效应，为攻克 CML 急髓变提供全新干预策略。相关成果已发表于 <em>Advanced Science</em>。</p>
-      <div class="card-contrib">主导前期大数据分析 · Western Blot · 流式细胞术 · 竞赛论文全文撰写与答辩</div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px">
-      <div class="card" style="margin-bottom:0">
+      <div class="card" style="margin-top:8px">
         <div class="card-shine"></div>
-        <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,transparent)"></div>
-        <div class="flex-head">
-          <div class="card-title" style="font-size:.9rem">全国大学生统计建模大赛</div>
-          <span class="badge b-indigo">省级二等奖</span>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#34d399)"></div>
+        <div class="card-title" style="margin-bottom:16px">项目立项</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+          <span class="badge b-blue" style="margin-top:2px;flex-shrink:0">省级</span>
+          <div>
+            <div style="font-size:.9rem;font-weight:600">《核心转录调控环路驱动非小细胞肺癌奥西替尼耐药的作用与机制研究》</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:2px">负责人</div>
+          </div>
         </div>
-        <div class="card-meta" style="margin-top:5px">2025 年 · 负责人</div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span class="badge b-indigo" style="margin-top:2px;flex-shrink:0">校级</span>
+          <div>
+            <div style="font-size:.9rem;font-weight:600">《超级增强子驱动SOX4/SMAD3互作介导质膜重塑促进慢粒白血病急髓变的作用机制研究》</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:2px">成员</div>
+          </div>
+        </div>
       </div>
-      <div class="card" style="margin-bottom:0">
+    </section>
+
+    <!-- ==================== PUBLICATIONS ==================== -->
+    <section id="pub" class="section">
+      <button class="back-btn" onclick="showHero()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>返回主页
+      </button>
+      <span class="sec-tag">Publications</span>
+      <h2 class="sec-title">科研成果</h2>
+
+      <div class="stat-row" style="margin-bottom:32px">
+        <div class="stat-tile">
+          <div class="stat-val">7+</div>
+          <div class="stat-lbl">已发表/在审</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-val">9</div>
+          <div class="stat-lbl">在投文章</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-val">3</div>
+          <div class="stat-lbl">第一作者</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-val">5+</div>
+          <div class="stat-lbl">一区 TOP</div>
+        </div>
+      </div>
+
+      <!-- P1 -->
+      <div class="card">
         <div class="card-shine"></div>
-        <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,transparent)"></div>
-        <div class="flex-head">
-          <div class="card-title" style="font-size:.9rem">全国大学生生命科学竞赛</div>
-          <span class="badge b-green">省级三等奖</span>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#60a5fa,#818cf8)">1</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">A non-canonical core transcriptional regulatory circuit
+              orchestrates chromatin reprogramming to drive Osimertinib resistance in non-small cell lung cancer</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Advanced Science</span>
+              <span class="badge b-gold">中科院一区 TOP · IF 14.1</span>
+              <span class="badge b-indigo">第二作者</span>
+              <span class="badge b-rose">Under Revision</span>
+            </div>
+            <p class="card-body">
+              发现由多分子协同驱动的非经典核心转录调控网络介导非小细胞肺癌奥西替尼耐药；揭示辅因子稳固转录复合体、驱动肿瘤神经内分泌分化及抑制铁死亡的分子机制；验证双靶点联合抑制方案可有效逆转耐药，提供新型联合用药策略。
+            </p>
+            <div class="card-contrib">个人贡献：科研概念图绘制、方法学撰写、Figure Legend；通路分析、药物联用、分子对接及可视化；Western Blot、流式细胞术、动物灌胃模型
+            </div>
+          </div>
         </div>
-        <div class="card-meta" style="margin-top:5px">2024 年 · 第 1 成员</div>
       </div>
-      <div class="card" style="margin-bottom:0">
+
+      <!-- P2 -->
+      <div class="card">
         <div class="card-shine"></div>
-        <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,transparent)"></div>
-        <div class="flex-head">
-          <div class="card-title" style="font-size:.9rem">电子商务"三创"挑战赛</div>
-          <span class="badge b-gold">校级特等奖</span>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#818cf8,#c084fc)">2</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Super-enhancer-driven SOX4/SMAD3 mediate membrane remodeling
+              by regulating phospholipid metabolism to accelerate leukemia progression</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Advanced Science</span>
+              <span class="badge b-gold">中科院一区 TOP · IF 14.1</span>
+              <span class="badge b-violet">核心成员</span>
+              <span class="badge b-green">已发表</span>
+            </div>
+            <p class="card-body">揭示超级增强子驱动 SOX4/SMAD3 正反馈环路，共同激活 AXL/LPCAT1 轴增强 AKT/ERK/STAT5 信号， 速慢粒白血病向急变期进展；证实
+              Bemcentinib 靶向 AXL 可显著抑制 CML-BP，提供新治疗策略。</p>
+            <div class="card-contrib">个人贡献：Western Blot、数据分析及可视化</div>
+          </div>
         </div>
-        <div class="card-meta" style="margin-top:5px">2025 年 · 第 1 成员</div>
       </div>
-      <div class="card" style="margin-bottom:0">
+
+      <!-- P3 -->
+      <div class="card">
         <div class="card-shine"></div>
-        <div class="card-bar" style="background:linear-gradient(to bottom,#c084fc,transparent)"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#34d399,#60a5fa)">3</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Nationwide Causal Effects of PM2.5 Component Mixture on
+              Ischemic Heart Disease Mortality in the United States, 2000–2019</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Ecotoxicology and Environmental Safety</span>
+              <span class="badge b-gold">中科院小类一区 · IF 6.1</span>
+              <span class="badge b-green">第一作者</span>
+              <span class="badge b-rose">Under Revision</span>
+            </div>
+            <p class="card-body">利用美国 20 年全国县级面板数据，系统探究 PM2.5
+              化学组分混合物对缺血性心脏病死亡率的长期因果关联；明确硫酸盐与硝酸盐的主导权重；揭示种族、经济与气候维度的健康不平等现象，为靶向减排公共卫生干预提供依据。</p>
+            <div class="card-contrib">个人贡献：核心数据收集（空气网格、死亡结局）、爬虫代码编写、可视化、全文与 Cover Letter 撰写</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#fbbf24,#f97316)">4</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Causal Effects of PM2.5 Component Mixture on Endocrine,
+              Nutritional, and Metabolic Disease Mortality: Evidence from a Nationwide U.S. Study</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Environment International</span>
+              <span class="badge b-gold">SCI 一区 TOP · IF 9.7</span>
+              <span class="badge b-green">第一作者</span>
+              <span class="badge b-rose">Under Review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P5 -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#f0abfc,#a78bfa)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#f0abfc,#a78bfa)">5</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Silicified curcumin microspheres Combats cardiovascular
+              diseases via Nrf2/HO-1 pathway</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Bioactive Materials</span>
+              <span class="badge b-gold">中科院一区 TOP · IF 20.3</span>
+              <span class="badge b-violet">核心成员</span>
+              <span class="badge b-green">已发表</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P6 -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#67e8f9,#60a5fa)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#67e8f9,#3b82f6)">6</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Development of the Retinal Senescence Protein Signature
+              Based on Proteomics to Evaluate the Progression of Diabetic Retinopathy</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Visual Neuroscience</span>
+              <span class="badge b-indigo">中科院二区 Q1 · IF 6.18</span>
+              <span class="badge b-green">第一作者 · 已发表</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P7 -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fda4af,#f43f5e)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#fda4af,#f43f5e)">7</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Global Patterns and Individual Risk Phenotypes of
+              Cardiovascular Disease in Thoracic Malignancy: Analysis of Global Burden of Disease 2021 and UK Biobank
+            </div>
+            <div class="badge-row">
+              <span class="badge b-violet">中科院三区 Q2 · IF 2.4</span>
+              <span class="badge b-blue">第二作者</span>
+              <span class="badge b-rose">Under Review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In pipeline -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#94a3b8,#cbd5e1)"></div>
+        <div class="card-title" style="margin-bottom:12px">在投文章（9 篇）</div>
+        <div class="badge-row">
+          <span class="badge b-blue">一区 TOP 核心成员 × 5</span>
+          <span class="badge b-indigo">三区第一作者 × 2</span>
+          <span class="badge b-violet">三区核心成员 × 2</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== COMPETITIONS ==================== -->
+    <section id="comp" class="section">
+      <button class="back-btn" onclick="showHero()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>返回主页
+      </button>
+      <span class="sec-tag">Competitions</span>
+      <h2 class="sec-title">学科竞赛</h2>
+
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
         <div class="flex-head">
-          <div class="card-title" style="font-size:.9rem">麻醉学专业知识竞赛（第四届）</div>
-          <span class="badge b-violet">校级二等奖</span>
+          <div>
+            <div class="card-title">第二十届挑战杯"揭榜挂帅"专项赛</div>
+            <div class="card-meta">负责人</div>
+          </div>
+          <span class="badge b-gold">国家级优秀奖</span>
         </div>
-        <div class="card-meta" style="margin-top:5px">2025 年 · 个人</div>
+        <p class="card-body">开发《基于深度学习及优化算法的中药多组分智能均化系统》，集成 CTGAN 数据扩充、LightGBM 质量评分模型及双引擎优化算法（SLSQP +
+          NSGA-II），在多重约束下智能计算最优中药混批配比，实现从"经验试错"到"数据预测"的智能决策转变。</p>
+        <div class="card-contrib">统筹整体架构 · 主导 LightGBM 模型构建 · 设计"小药 LLM"交互界面 · 独立构建前端可运行网页 · 推动软著申请与成果落地</div>
       </div>
-    </div>
-  </section>
 
-  <!-- ==================== AWARDS ==================== -->
-  <section id="award" class="section">
-    <button class="back-btn" onclick="showHero()">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回主页
-    </button>
-    <span class="sec-tag">Honors</span>
-    <h2 class="sec-title">荣誉奖项</h2>
-
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#60a5fa)"></div>
-
-      <div class="award-row">
-        <div class="award-dot" style="background:#d97706;box-shadow:0 0 0 3px rgba(251,191,36,.25),0 0 10px rgba(217,119,6,.4)"></div>
-        <div class="award-text">
-          <span style="font-weight:700;color:#92400e">中华人民共和国教育部国家奖学金</span>
-          <div style="font-size:.78rem;color:var(--muted);margin-top:1px">全国最高荣誉学生奖学金</div>
+      <div class="card" style="cursor: pointer;" onclick="openModal('生化竞赛.png')">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
+        <div class="flex-head">
+          <div>
+            <div class="card-title">2024 年广东省生物化学实验技能大赛</div>
+            <div class="card-meta">负责人</div>
+          </div>
+          <span class="badge b-blue">省级一等奖</span>
         </div>
-        <div class="award-year">2024</div>
+        <p class="card-body">鉴定 SOX4 为驱动 CML 急变的关键靶点，首次验证"老药新用"策略——证实二甲双胍靶向下调 SOX4，与伊马替尼联用产生显著协同杀伤效应，为攻克 CML
+          急髓变提供全新干预策略。相关成果已发表于 <em>Advanced Science</em>。</p>
+        <div class="card-contrib">主导前期大数据分析 · Western Blot · 流式细胞术 · 竞赛论文全文撰写与答辩</div>
       </div>
 
-      <div class="award-row">
-        <div class="award-dot" style="background:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.2)"></div>
-        <div class="award-text">校级优秀学生奖学金一等奖</div>
-        <div class="award-year">2024、2025</div>
-      </div>
-
-      <div class="award-row">
-        <div class="award-dot" style="background:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.2)"></div>
-        <div class="award-text">广州医科大学优秀共青团员</div>
-        <div class="award-year">2023</div>
-      </div>
-
-      <div class="award-row">
-        <div class="award-dot" style="background:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.2)"></div>
-        <div class="award-text">广州医科大学优秀班干部</div>
-        <div class="award-year">2023</div>
-      </div>
-
-      <div class="award-row">
-        <div class="award-dot" style="background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.2)"></div>
-        <div class="award-text">广州青年马克思主义工程优秀学员</div>
-        <div class="award-year">2023</div>
-      </div>
-
-      <div class="award-row" style="border-bottom:none">
-        <div class="award-dot" style="background:#cbd5e1"></div>
-        <div class="award-text" style="color:var(--muted)">另有校、院级奖项若干</div>
-        <div class="award-year">—</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SKILLS ==================== -->
-  <section id="skill" class="section">
-    <button class="back-btn" onclick="showHero()">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回主页
-    </button>
-    <span class="sec-tag">Skills</span>
-    <h2 class="sec-title">技能专长</h2>
-
-    <div class="card" style="margin-bottom:18px">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
-      <div class="skill-block">
-        <div class="skill-label">临床医学</div>
-        <div class="skill-tags">
-          <span class="skill-tag">临床思维</span><span class="skill-tag">麻醉学理论</span>
-          <span class="skill-tag">基础医学全科</span><span class="skill-tag">临床技能操作</span>
-          <span class="skill-tag">实验诊断学</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px">
+        <div class="card" style="margin-bottom:0; cursor: pointer;" onclick="openModal('统计建模大赛.png')">
+          <div class="card-shine"></div>
+          <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,transparent)"></div>
+          <div class="flex-head">
+            <div class="card-title" style="font-size:.9rem">全国大学生统计建模大赛</div>
+            <span class="badge b-indigo">省级二等奖</span>
+          </div>
+          <div class="card-meta" style="margin-top:5px">2025 年 · 负责人</div>
+        </div>
+        <div class="card" style="margin-bottom:0; cursor: pointer;" onclick="openModal('生命科学竞赛.png')">
+          <div class="card-shine"></div>
+          <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,transparent)"></div>
+          <div class="flex-head">
+            <div class="card-title" style="font-size:.9rem">全国大学生生命科学竞赛</div>
+            <span class="badge b-green">省级三等奖</span>
+          </div>
+          <div class="card-meta" style="margin-top:5px">2024 年 · 第 1 成员</div>
+        </div>
+        <div class="card" style="margin-bottom:0; cursor: pointer;" onclick="openModal('三创赛.jpg')">
+          <div class="card-shine"></div>
+          <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,transparent)"></div>
+          <div class="flex-head">
+            <div class="card-title" style="font-size:.9rem">电子商务"三创"挑战赛</div>
+            <span class="badge b-gold">校级特等奖</span>
+          </div>
+          <div class="card-meta" style="margin-top:5px">2025 年 · 第 1 成员</div>
+        </div>
+        <div class="card" style="margin-bottom:0; cursor: pointer;" onclick="openModal('麻醉知识竞赛.png')">
+          <div class="card-shine"></div>
+          <div class="card-bar" style="background:linear-gradient(to bottom,#c084fc,transparent)"></div>
+          <div class="flex-head">
+            <div class="card-title" style="font-size:.9rem">麻醉学专业知识竞赛（第四届）</div>
+            <span class="badge b-violet">校级二等奖</span>
+          </div>
+          <div class="card-meta" style="margin-top:5px">2025 年 · 个人</div>
         </div>
       </div>
-      <div class="divider"></div>
-      <div class="skill-block" style="margin-bottom:0">
-        <div class="skill-label">基础实验操作</div>
-        <div class="skill-tags">
-          <span class="skill-tag">细胞培养</span><span class="skill-tag">Western Blot</span>
-          <span class="skill-tag">qPCR</span><span class="skill-tag">流式细胞术</span>
-          <span class="skill-tag">动物实验</span><span class="skill-tag">分子对接</span>
-          <span class="skill-tag">质粒提取</span>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="card" style="margin-bottom:18px">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
-      <div class="skill-block">
-        <div class="skill-label">编程语言</div>
-        <div class="skill-tags">
-          <span class="skill-tag">R</span><span class="skill-tag">Python</span>
-          <span class="skill-tag">HTML / CSS / JS</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div class="skill-block" style="margin-bottom:0">
-        <div class="skill-label">生物信息学</div>
-        <div class="skill-tags">
-          <span class="skill-tag">差异基因分析</span><span class="skill-tag">通路富集分析</span>
-          <span class="skill-tag">单细胞测序</span><span class="skill-tag">转录组可视化</span>
-          <span class="skill-tag">超级增强子分析</span>
-        </div>
-      </div>
-    </div>
+    <!-- ==================== AWARDS ==================== -->
+    <section id="award" class="section">
+      <button class="back-btn" onclick="showHero()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>返回主页
+      </button>
+      <span class="sec-tag">Honors</span>
+      <h2 class="sec-title">荣誉奖项</h2>
 
-    <div class="card" style="margin-bottom:18px">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
-      <div class="skill-block">
-        <div class="skill-label">机器学习 / 深度学习</div>
-        <div class="skill-tags">
-          <span class="skill-tag">LightGBM</span><span class="skill-tag">CTGAN</span>
-          <span class="skill-tag">NSGA-II</span><span class="skill-tag">SLSQP</span>
-          <span class="skill-tag">模型调参</span><span class="skill-tag">LLM 微调</span>
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#60a5fa)"></div>
+
+        <div class="award-row" style="cursor: pointer; padding: 14px 10px; border-radius: 8px; transition: background 0.3s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.4)'" onmouseout="this.style.backgroundColor='transparent'" onclick="openModal('国家奖学金.png')">
+          <div class="award-dot"
+            style="background:#d97706;box-shadow:0 0 0 3px rgba(251,191,36,.25),0 0 10px rgba(217,119,6,.4)"></div>
+          <div class="award-text">
+            <span style="font-weight:700;color:#92400e">中华人民共和国教育部国家奖学金</span>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:1px">全国最高荣誉学生奖学金</div>
+          </div>
+          <div class="award-year">2024</div>
+        </div>
+
+        <div class="award-row" style="cursor: pointer; padding: 14px 10px; border-radius: 8px; transition: background 0.3s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.4)'" onmouseout="this.style.backgroundColor='transparent'" onclick="openModal('一等奖学金.png')">
+          <div class="award-dot" style="background:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.2)"></div>
+          <div class="award-text">校级优秀学生奖学金一等奖</div>
+          <div class="award-year">2024、2025</div>
+        </div>
+
+        <div class="award-row" style="cursor: pointer; padding: 14px 10px; border-radius: 8px; transition: background 0.3s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.4)'" onmouseout="this.style.backgroundColor='transparent'" onclick="openModal('优秀共青团员.png')">
+          <div class="award-dot" style="background:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.2)"></div>
+          <div class="award-text">广州医科大学优秀共青团员</div>
+          <div class="award-year">2023</div>
+        </div>
+
+        <div class="award-row" style="cursor: pointer; padding: 14px 10px; border-radius: 8px; transition: background 0.3s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.4)'" onmouseout="this.style.backgroundColor='transparent'" onclick="openModal('优秀学生干部.png')">
+          <div class="award-dot" style="background:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.2)"></div>
+          <div class="award-text">广州医科大学优秀班干部</div>
+          <div class="award-year">2023</div>
+        </div>
+
+        <div class="award-row">
+          <div class="award-dot" style="background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.2)"></div>
+          <div class="award-text">广州青年马克思主义工程优秀学员</div>
+          <div class="award-year">2023</div>
+        </div>
+
+        <div class="award-row" style="border-bottom:none">
+          <div class="award-dot" style="background:#cbd5e1"></div>
+          <div class="award-text" style="color:var(--muted)">另有校、院级奖项若干</div>
+          <div class="award-year">—</div>
         </div>
       </div>
-      <div class="divider"></div>
-      <div class="skill-block" style="margin-bottom:0">
-        <div class="skill-label">流行病学 / 统计分析</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Cox 分析</span><span class="skill-tag">Lcmm 轨迹</span>
-          <span class="skill-tag">交互作用</span><span class="skill-tag">RCS 限制性立方样条</span>
-          <span class="skill-tag">因果推断建模</span><span class="skill-tag">面板数据分析</span>
-          <span class="skill-tag">大数据爬虫</span>
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section id="skill" class="section">
+      <button class="back-btn" onclick="showHero()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>返回主页
+      </button>
+      <span class="sec-tag">Skills</span>
+      <h2 class="sec-title">技能专长</h2>
+
+      <div class="card" style="margin-bottom:18px">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
+        <div class="skill-block">
+          <div class="skill-label">临床医学</div>
+          <div class="skill-tags">
+            <span class="skill-tag">临床思维</span><span class="skill-tag">麻醉学理论</span>
+            <span class="skill-tag">基础医学全科</span><span class="skill-tag">临床技能操作</span>
+            <span class="skill-tag">实验诊断学</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="skill-block" style="margin-bottom:0">
+          <div class="skill-label">基础实验操作</div>
+          <div class="skill-tags">
+            <span class="skill-tag">细胞培养</span><span class="skill-tag">Western Blot</span>
+            <span class="skill-tag">qPCR</span><span class="skill-tag">流式细胞术</span>
+            <span class="skill-tag">动物实验</span><span class="skill-tag">分子对接</span>
+            <span class="skill-tag">质粒提取</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-shine"></div>
-      <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
-      <div class="skill-block" style="margin-bottom:0">
-        <div class="skill-label">学术写作 / 其他</div>
-        <div class="skill-tags">
-          <span class="skill-tag">高水平英文论文写作</span><span class="skill-tag">Cover Letter 撰写</span>
-          <span class="skill-tag">科研概念图制作</span><span class="skill-tag">前端网页开发</span>
-          <span class="skill-tag">CET-6 英语</span>
+      <div class="card" style="margin-bottom:18px">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
+        <div class="skill-block">
+          <div class="skill-label">编程语言</div>
+          <div class="skill-tags">
+            <span class="skill-tag">R</span><span class="skill-tag">Python</span>
+            <span class="skill-tag">HTML / CSS / JS</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="skill-block" style="margin-bottom:0">
+          <div class="skill-label">生物信息学</div>
+          <div class="skill-tags">
+            <span class="skill-tag">差异基因分析</span><span class="skill-tag">通路富集分析</span>
+            <span class="skill-tag">单细胞测序</span><span class="skill-tag">转录组可视化</span>
+            <span class="skill-tag">超级增强子分析</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-</div>
+      <div class="card" style="margin-bottom:18px">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
+        <div class="skill-block">
+          <div class="skill-label">机器学习 / 深度学习</div>
+          <div class="skill-tags">
+            <span class="skill-tag">LightGBM</span><span class="skill-tag">CTGAN</span>
+            <span class="skill-tag">NSGA-II</span><span class="skill-tag">SLSQP</span>
+            <span class="skill-tag">模型调参</span><span class="skill-tag">LLM 微调</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="skill-block" style="margin-bottom:0">
+          <div class="skill-label">流行病学 / 统计分析</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Cox 分析</span><span class="skill-tag">Lcmm 轨迹</span>
+            <span class="skill-tag">交互作用</span><span class="skill-tag">RCS 限制性立方样条</span>
+            <span class="skill-tag">因果推断建模</span><span class="skill-tag">面板数据分析</span>
+            <span class="skill-tag">大数据爬虫</span>
+          </div>
+        </div>
+      </div>
 
-<script>
-  function showSection(id) {
-    document.getElementById('hero').style.display = 'none';
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    const t = document.getElementById(id);
-    if (t) { t.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  }
-  function showHero() {
-    document.getElementById('hero').style.display = '';
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-// 新增：互动功能
-  const greetings = [
-    "科研顺利，早日发 CNS！", 
-    "今天也要元气满满哦！", 
-    "欢迎随时通过邮件与我联系交流！",
-    "✨ 欢迎来到我的个人网页，希望能与您多多交流！",
-    "别老按了！",
-    "希望你我前程似锦！",
-    "微信HAD2004快加！",
-    "保研上岸！",
-    "一起加油！",
-  ];
-  function pokeMe() {
-    const msg = document.getElementById('welcomeMsg');
-    // 随机选取一句不同的问候语
-    let randomGreeting;
-    do {
-      randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-    } while (msg.innerText === randomGreeting);
-    
-    msg.style.opacity = 0; // 简单的淡入淡出动画
-    setTimeout(() => {
-      msg.innerText = randomGreeting;
-      msg.style.opacity = 1;
-    }, 200);
-  }
-</script>
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
+        <div class="skill-block" style="margin-bottom:0">
+          <div class="skill-label">学术写作 / 其他</div>
+          <div class="skill-tags">
+            <span class="skill-tag">高水平英文论文写作</span><span class="skill-tag">Cover Letter 撰写</span>
+            <span class="skill-tag">科研概念图制作</span><span class="skill-tag">前端网页开发</span>
+            <span class="skill-tag">CET-6 英语</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==================== IMAGE MODAL ==================== -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script>
+    /* ===== MODAL ===== */
+    function openModal(src) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      modal.style.display = "block";
+      void modal.offsetWidth;
+      modal.classList.add('show');
+      modalImg.src = src;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('show');
+      setTimeout(() => { modal.style.display = "none"; }, 300);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") closeModal();
+    });
+
+    /* ===== SECTION NAV ===== */
+    const sectionToNavMap = {
+      'edu': 'nav-edu', 'research': 'nav-research', 'pub': 'nav-pub',
+      'comp': 'nav-comp', 'award': 'nav-award', 'skill': 'nav-skill'
+    };
+
+    function showSection(id) {
+      document.getElementById('hero').style.display = 'none';
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      const t = document.getElementById(id);
+      if (t) { t.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      if (sectionToNavMap[id]) setSidebarActive(sectionToNavMap[id]);
+    }
+
+    function showHero() {
+      document.getElementById('hero').style.display = '';
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setSidebarActive('nav-home');
+    }
+
+    /* ===== SIDEBAR ACTIVE STATE ===== */
+    function setSidebarActive(id) {
+      document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = theme === 'dark' ? '☀️' : '🌙';
+      const el1 = document.getElementById('themeIcon');
+      const el2 = document.getElementById('themeBtnHero');
+      if (el1) el1.textContent = icon;
+      if (el2) el2.textContent = icon;
+      localStorage.setItem('theme', theme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    /* ===== READING PROGRESS BAR ===== */
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      const bar = document.getElementById('reading-progress');
+      if (bar) bar.style.width = pct + '%';
+    });
+
+    /* ===== COPY CONTACT ===== */
+    function copyContact() {
+      const text = '电话：(+86) 159-1840-0341\n邮箱：had785387047@gmail.com\n微信：HAD2004';
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.currentTarget;
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span>✅</span> 已复制！';
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+      }).catch(() => {
+        prompt('请手动复制：', text);
+      });
+    }
+
+    /* ===== POKE ME ===== */
+    const greetings = [
+      "科研顺利，早日发 CNS！",
+      "今天也要元气满满哦！",
+      "欢迎随时通过邮件与我联系交流！",
+      "✨ 欢迎来到我的个人网页，希望能与您多多交流！",
+      "别老按了！",
+      "希望你我前程似锦！",
+      "微信 HAD2004 快加！",
+      "保研上岸！",
+      "一起加油！",
+    ];
+
+    function pokeMe() {
+      const msg = document.getElementById('welcomeMsg');
+      let randomGreeting;
+      do {
+        randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+      } while (msg.innerText === randomGreeting);
+      msg.style.opacity = 0;
+      setTimeout(() => {
+        msg.innerText = randomGreeting;
+        msg.style.opacity = 1;
+      }, 200);
+    }
+
+    /* ===== RESPONSIVE SIDEBAR ===== */
+    function checkSidebarWidth() {
+      const sidebar = document.getElementById('sidebar');
+      const page = document.getElementById('main-page');
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('visible');
+        page.classList.remove('has-sidebar');
+      } else {
+        sidebar.classList.add('visible');
+        page.classList.add('has-sidebar');
+      }
+    }
+    checkSidebarWidth();
+    window.addEventListener('resize', checkSidebarWidth);
+  </script>
 </body>
-</html>
 
+</html>
