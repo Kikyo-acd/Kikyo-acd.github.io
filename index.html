@@ -925,6 +925,61 @@
       margin-top: 1px;
     }
 
+    .paper-clickable {
+      cursor: pointer;
+    }
+
+    .rep-card {
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      box-shadow: 0 12px 34px rgba(59, 130, 246, 0.14), 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+    }
+
+    .pub-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: -22px;
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .paper-detail {
+      margin-top: 12px;
+      border: 1px dashed rgba(99, 102, 241, 0.28);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.45);
+      overflow: hidden;
+    }
+
+    .paper-detail summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: #4f46e5;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .paper-detail summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .paper-detail summary::after {
+      content: ' +';
+      font-weight: 800;
+    }
+
+    .paper-detail[open] summary::after {
+      content: ' -';
+    }
+
+    .paper-detail-content {
+      padding: 0 12px 12px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.82;
+    }
+
     /* ===================== SKILLS ===================== */
     .skill-block {
       margin-bottom: 22px;
@@ -1053,6 +1108,61 @@
       font-style: italic;
     }
 
+    /* ===================== TIME THEME NOTICE ===================== */
+    .time-theme-toast {
+      position: fixed;
+      right: 22px;
+      bottom: 26px;
+      width: min(360px, calc(100vw - 28px));
+      z-index: 12000;
+      border-radius: 14px;
+      padding: 14px 15px 13px;
+      color: #0f172a;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(238, 245, 255, 0.92));
+      border: 1px solid rgba(148, 163, 184, 0.34);
+      box-shadow: 0 16px 40px rgba(30, 64, 175, 0.18);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+      pointer-events: none;
+      transition: opacity .42s ease, transform .42s ease;
+    }
+
+    .time-theme-toast.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .time-theme-toast.night {
+      color: #e2e8f0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(30, 41, 59, 0.92));
+      border-color: rgba(100, 116, 139, 0.4);
+      box-shadow: 0 16px 40px rgba(2, 6, 23, 0.42);
+    }
+
+    .time-theme-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      letter-spacing: 0.01em;
+    }
+
+    .time-theme-body {
+      font-size: 0.81rem;
+      line-height: 1.72;
+      opacity: 0.93;
+    }
+
+    @media (max-width: 560px) {
+      .time-theme-toast {
+        right: 14px;
+        bottom: 16px;
+        width: calc(100vw - 20px);
+      }
+    }
+
     /* ===================== PRINT STYLES ===================== */
     @media print {
       .sidebar, .top-bar, .back-btn, #reading-progress, .blob-stage { display: none !important; }
@@ -1140,10 +1250,6 @@
     <div class="sidebar-footer">
       <button class="sidebar-footer-btn" onclick="toggleTheme()">
         <span id="themeIcon">🌙</span> 切换主题
-      </button>
-      <button class="sidebar-footer-btn" onclick="window.print()">
-        <span>🖨️</span> 打印简历
-      </button>
       <button class="sidebar-footer-btn" onclick="copyContact()">
         <span>📋</span> 复制联系方式
       </button>
@@ -1276,7 +1382,7 @@
         </div>
         <div class="stat-row">
           <div class="stat-tile">
-            <div class="stat-val">3.93<span style="font-size:.65rem;color:var(--muted)">/5</span></div>
+            <div class="stat-val">3.94<span style="font-size:.65rem;color:var(--muted)">/5</span></div>
             <div class="stat-lbl">GPA</div>
           </div>
           <div class="stat-tile">
@@ -1371,8 +1477,7 @@
               </div>
               <span class="badge b-indigo">已完成</span>
             </div>
-            <p class="card-body">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、 物模型等多项实验工作，并以第二作者身份参与发表
-              Advanced Science 论文。</p>
+            <p class="card-body">深入参与非小细胞肺癌奥西替尼耐药机制及慢粒白血病急髓变机制研究，承担生信分析、Western Blot、流式细胞术、 物模型等多项实验工作</p>
           </div>
         </div>
 
@@ -1429,25 +1534,27 @@
 
       <div class="stat-row" style="margin-bottom:32px">
         <div class="stat-tile">
-          <div class="stat-val">7+</div>
-          <div class="stat-lbl">已发表/在审</div>
+          <div class="stat-val">10</div>
+          <div class="stat-lbl">论文成果总数</div>
         </div>
         <div class="stat-tile">
-          <div class="stat-val">9</div>
-          <div class="stat-lbl">在投文章</div>
+          <div class="stat-val">5</div>
+          <div class="stat-lbl">Online/Accept</div>
         </div>
         <div class="stat-tile">
-          <div class="stat-val">3</div>
-          <div class="stat-lbl">第一作者</div>
+          <div class="stat-val">4</div>
+          <div class="stat-lbl">第一/共同第一</div>
         </div>
         <div class="stat-tile">
-          <div class="stat-val">5+</div>
-          <div class="stat-lbl">一区 TOP</div>
+          <div class="stat-val">4</div>
+          <div class="stat-lbl">Revision</div>
         </div>
       </div>
 
+      <p class="pub-note">代表作已置顶展示；点击带有“点击查看 PDF”标签的卡片可直接打开对应全文。</p>
+
       <!-- P1 -->
-      <div class="card">
+      <div class="card rep-card">
         <div class="card-shine"></div>
         <div class="card-bar" style="background:linear-gradient(to bottom,#60a5fa,#818cf8)"></div>
         <div class="pub-entry">
@@ -1457,84 +1564,95 @@
               orchestrates chromatin reprogramming to drive Osimertinib resistance in non-small cell lung cancer</div>
             <div class="badge-row">
               <span class="badge b-blue">Advanced Science</span>
-              <span class="badge b-gold">中科院一区 TOP · IF 14.1</span>
+              <span class="badge b-gold">中科院一区 TOP · Q1 · IF 14.1</span>
               <span class="badge b-indigo">第二作者</span>
-              <span class="badge b-rose">Under Revision</span>
+              <span class="badge b-rose">Revision</span>
             </div>
-            <p class="card-body">
-              发现由多分子协同驱动的非经典核心转录调控网络介导非小细胞肺癌奥西替尼耐药；揭示辅因子稳固转录复合体、驱动肿瘤神经内分泌分化及抑制铁死亡的分子机制；验证双靶点联合抑制方案可有效逆转耐药，提供新型联合用药策略。
-            </p>
-            <div class="card-contrib">个人贡献：科研概念图绘制、方法学撰写、Figure Legend；通路分析、药物联用、分子对接及可视化；Western Blot、流式细胞术、动物灌胃模型
-            </div>
+            <details class="paper-detail">
+              <summary>展开论文内容与核心贡献</summary>
+              <div class="paper-detail-content">
+                <p><strong>论文内容：</strong>针对非小细胞肺癌靶向耐药难题，揭示了由多分子协同驱动的非经典核心转录调控网络。该网络通过驱动肿瘤神经内分泌分化及抑制铁死亡维持耐药表型。体内外模型证实双靶点联合抑制方案能有效恢复肿瘤敏感性，为克服靶向耐药提供新靶点与联合干预策略。</p>
+                <p><strong>核心贡献：</strong>① 生信与可视化：独立承担通路挖掘、药物联用及分子对接等分析，并完成核心科研概念图绘制（含 Figure Legend）。② 湿实验与动物模型：负责小鼠活体模型构建、每日灌胃给药与数据记录；开展 WB、流式细胞术等实验。③ 学术写作：负责 Methodology 英文撰写。</p>
+              </div>
+            </details>
           </div>
         </div>
       </div>
 
       <!-- P2 -->
-      <div class="card">
+      <div class="card rep-card paper-clickable" onclick="openPdf('1-s2.0-S0147651326004379-main.pdf')">
         <div class="card-shine"></div>
         <div class="card-bar" style="background:linear-gradient(to bottom,#818cf8,#c084fc)"></div>
         <div class="pub-entry">
           <div class="pub-num" style="background:linear-gradient(135deg,#818cf8,#c084fc)">2</div>
           <div style="flex:1">
-            <div class="card-title" style="line-height:1.5">Super-enhancer-driven SOX4/SMAD3 mediate membrane remodeling
-              by regulating phospholipid metabolism to accelerate leukemia progression</div>
+            <div class="card-title" style="line-height:1.5">Nationwide Causal Effects of PM2.5 Component Mixture on
+              Ischemic Heart Disease Mortality in the United States, 2000-2019</div>
             <div class="badge-row">
-              <span class="badge b-blue">Advanced Science</span>
-              <span class="badge b-gold">中科院一区 TOP · IF 14.1</span>
-              <span class="badge b-violet">核心成员</span>
-              <span class="badge b-green">已发表</span>
+              <span class="badge b-blue">Ecotoxicology and Environmental Safety</span>
+              <span class="badge b-gold">中科院小类一区 TOP · Q1 · IF 6.1</span>
+              <span class="badge b-green">第一作者</span>
+              <span class="badge b-green">Online</span>
+              <span class="badge b-indigo">点击查看 PDF</span>
             </div>
-            <p class="card-body">揭示超级增强子驱动 SOX4/SMAD3 正反馈环路，共同激活 AXL/LPCAT1 轴增强 AKT/ERK/STAT5 信号， 速慢粒白血病向急变期进展；证实
-              Bemcentinib 靶向 AXL 可显著抑制 CML-BP，提供新治疗策略。</p>
-            <div class="card-contrib">个人贡献：Western Blot、数据分析及可视化</div>
+            <details class="paper-detail">
+              <summary>展开论文内容与核心贡献</summary>
+              <div class="paper-detail-content">
+                <p><strong>论文内容：</strong>利用美国 20 年全国县级面板数据，通过因果推断建模探究 PM2.5 特定组分及混合暴露对缺血性心脏病死亡率的长期因果关联。重点识别硫酸盐和硝酸盐的主导风险，并揭示不同社会及气候条件下的暴露不平等，为精准减排与公共卫生干预提供证据。</p>
+                <p><strong>核心贡献：</strong>① 数据采集与处理：独立编写爬虫，完成空气网格大数据与死亡结局的自动化下载和清洗。② 分析与写作：主导核心统计分析与可视化，独立完成英文手稿及 Cover Letter。</p>
+              </div>
+            </details>
           </div>
         </div>
       </div>
 
       <!-- P3 -->
-      <div class="card">
+      <div class="card rep-card paper-clickable" onclick="openPdf('vns-0026-0011.pdf')">
         <div class="card-shine"></div>
         <div class="card-bar" style="background:linear-gradient(to bottom,#34d399,#60a5fa)"></div>
         <div class="pub-entry">
           <div class="pub-num" style="background:linear-gradient(135deg,#34d399,#60a5fa)">3</div>
           <div style="flex:1">
-            <div class="card-title" style="line-height:1.5">Nationwide Causal Effects of PM2.5 Component Mixture on
-              Ischemic Heart Disease Mortality in the United States, 2000–2019</div>
+            <div class="card-title" style="line-height:1.5">Development of the Retinal Senescence Protein Signature Based on Proteomics to Predict the Progression of Diabetic Retinopathy</div>
             <div class="badge-row">
-              <span class="badge b-blue">Ecotoxicology and Environmental Safety</span>
-              <span class="badge b-gold">中科院小类一区 · IF 6.1</span>
-              <span class="badge b-green">第一作者</span>
-              <span class="badge b-rose">Under Revision</span>
+              <span class="badge b-blue">Visual Neuroscience</span>
+              <span class="badge b-indigo">中科院二区 · Q1 · IF 6.18</span>
+              <span class="badge b-green">共同第一作者</span>
+              <span class="badge b-green">Online</span>
+              <span class="badge b-indigo">点击查看 PDF</span>
             </div>
-            <p class="card-body">利用美国 20 年全国县级面板数据，系统探究 PM2.5
-              化学组分混合物对缺血性心脏病死亡率的长期因果关联；明确硫酸盐与硝酸盐的主导权重；揭示种族、经济与气候维度的健康不平等现象，为靶向减排公共卫生干预提供依据。</p>
-            <div class="card-contrib">个人贡献：核心数据收集（空气网格、死亡结局）、爬虫代码编写、可视化、全文与 Cover Letter 撰写</div>
+            <details class="paper-detail">
+              <summary>展开论文内容与核心贡献</summary>
+              <div class="paper-detail-content">
+                <p><strong>论文内容：</strong>基于房水蛋白质组学构建包含 307 个蛋白的“视网膜衰老蛋白特征”评分，并在 UK Biobank 超 5 万人大队列完成外部验证与生存分析，证实其与糖尿病视网膜病变进展及复合不良预后显著相关（HR=1.35）。研究为 DR 分子监控与靶向干预提供新框架。</p>
+                <p><strong>核心贡献：</strong>① 建模与撰写：主导多组学与大队列数据挖掘，完成蛋白差异分析、WGCNA、功能富集及 Cox 建模；主笔 Methodology。② 图表设计：独立编码完成 WGCNA 聚类、KM 曲线、森林图及分层分析图。③ 修稿推进：主导返修补充分析与审稿意见逐条回复。</p>
+              </div>
+            </details>
           </div>
         </div>
       </div>
 
       <!-- P4 -->
-      <div class="card">
+      <div class="card paper-clickable" onclick="openPdf('Advanced_Science_-_2026_-_Lou_-_Super‐Enhancer‐Driven_SOX4_SMAD3_Mediate_Membrane_Remodeling_by_Regulating_Phospholipid.pdf')">
         <div class="card-shine"></div>
         <div class="card-bar" style="background:linear-gradient(to bottom,#fbbf24,#f59e0b)"></div>
         <div class="pub-entry">
           <div class="pub-num" style="background:linear-gradient(135deg,#fbbf24,#f97316)">4</div>
           <div style="flex:1">
-            <div class="card-title" style="line-height:1.5">Causal Effects of PM2.5 Component Mixture on Endocrine,
-              Nutritional, and Metabolic Disease Mortality: Evidence from a Nationwide U.S. Study</div>
+            <div class="card-title" style="line-height:1.5">Super-enhancer-driven SOX4/SMAD3 mediate membrane remodeling by regulating phospholipid metabolism to accelerate leukemia progression</div>
             <div class="badge-row">
-              <span class="badge b-blue">Environment International</span>
-              <span class="badge b-gold">SCI 一区 TOP · IF 9.7</span>
-              <span class="badge b-green">第一作者</span>
-              <span class="badge b-rose">Under Review</span>
+              <span class="badge b-blue">Advanced Science</span>
+              <span class="badge b-gold">中科院一区 TOP · Q1 · IF 14.1</span>
+              <span class="badge b-violet">核心成员</span>
+              <span class="badge b-green">Online</span>
+              <span class="badge b-indigo">点击查看 PDF</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- P5 -->
-      <div class="card">
+      <div class="card paper-clickable" onclick="openPdf('1-s2.0-S2452199X25001094-main.pdf')">
         <div class="card-shine"></div>
         <div class="card-bar" style="background:linear-gradient(to bottom,#f0abfc,#a78bfa)"></div>
         <div class="pub-entry">
@@ -1544,9 +1662,10 @@
               diseases via Nrf2/HO-1 pathway</div>
             <div class="badge-row">
               <span class="badge b-blue">Bioactive Materials</span>
-              <span class="badge b-gold">中科院一区 TOP · IF 20.3</span>
+              <span class="badge b-gold">中科院一区 TOP · Q1 · IF 20.3</span>
               <span class="badge b-violet">核心成员</span>
-              <span class="badge b-green">已发表</span>
+              <span class="badge b-green">Online</span>
+              <span class="badge b-indigo">点击查看 PDF</span>
             </div>
           </div>
         </div>
@@ -1559,12 +1678,13 @@
         <div class="pub-entry">
           <div class="pub-num" style="background:linear-gradient(135deg,#67e8f9,#3b82f6)">6</div>
           <div style="flex:1">
-            <div class="card-title" style="line-height:1.5">Development of the Retinal Senescence Protein Signature
-              Based on Proteomics to Evaluate the Progression of Diabetic Retinopathy</div>
+            <div class="card-title" style="line-height:1.5">Causal Effects of PM2.5 Component Mixture on Endocrine,
+              Nutritional, and Metabolic Disease Mortality: Evidence from a Nationwide U.S. Study</div>
             <div class="badge-row">
-              <span class="badge b-blue">Visual Neuroscience</span>
-              <span class="badge b-indigo">中科院二区 Q1 · IF 6.18</span>
-              <span class="badge b-green">第一作者 · 已发表</span>
+              <span class="badge b-blue">Environment International</span>
+              <span class="badge b-gold">中科院一区 TOP · Q1 · IF 9.7</span>
+              <span class="badge b-green">共同第一作者</span>
+              <span class="badge b-rose">Revision</span>
             </div>
           </div>
         </div>
@@ -1577,13 +1697,47 @@
         <div class="pub-entry">
           <div class="pub-num" style="background:linear-gradient(135deg,#fda4af,#f43f5e)">7</div>
           <div style="flex:1">
-            <div class="card-title" style="line-height:1.5">Global Patterns and Individual Risk Phenotypes of
-              Cardiovascular Disease in Thoracic Malignancy: Analysis of Global Burden of Disease 2021 and UK Biobank
-            </div>
+            <div class="card-title" style="line-height:1.5">The Association between BMI trajectories and risk of metabolic ophthalmopathies: prospective evidence from the UK Biobank</div>
             <div class="badge-row">
-              <span class="badge b-violet">中科院三区 Q2 · IF 2.4</span>
-              <span class="badge b-blue">第二作者</span>
-              <span class="badge b-rose">Under Review</span>
+              <span class="badge b-blue">Eye</span>
+              <span class="badge b-indigo">中科院三区 · Q1</span>
+              <span class="badge b-green">第一作者</span>
+              <span class="badge b-rose">Revision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P8 -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#22d3ee,#0ea5e9)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#22d3ee,#0ea5e9)">8</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">Global Cardiovascular Burden and Individual Risk Phenotypes in Prostate Cancer: A Multilevel Analysis From Global Burden of Disease 2021 and the UK Biobank</div>
+            <div class="badge-row">
+              <span class="badge b-blue">Canadian Journal of Cardiology</span>
+              <span class="badge b-indigo">中科院二区 · Q1</span>
+              <span class="badge b-violet">第二作者</span>
+              <span class="badge b-rose">Revision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P9 -->
+      <div class="card">
+        <div class="card-shine"></div>
+        <div class="card-bar" style="background:linear-gradient(to bottom,#fb7185,#e11d48)"></div>
+        <div class="pub-entry">
+          <div class="pub-num" style="background:linear-gradient(135deg,#fb7185,#e11d48)">9</div>
+          <div style="flex:1">
+            <div class="card-title" style="line-height:1.5">基于无监督学习构建放疗癌症患者的心血管毒性风险分层</div>
+            <div class="badge-row">
+              <span class="badge b-blue">中华医学会第二十次放射肿瘤治疗学术会议</span>
+              <span class="badge b-violet">第二作者</span>
+              <span class="badge b-indigo">Accept</span>
             </div>
           </div>
         </div>
@@ -1593,11 +1747,11 @@
       <div class="card">
         <div class="card-shine"></div>
         <div class="card-bar" style="background:linear-gradient(to bottom,#94a3b8,#cbd5e1)"></div>
-        <div class="card-title" style="margin-bottom:12px">在投文章（9 篇）</div>
+        <div class="card-title" style="margin-bottom:12px">10. 其他在投/送审/返修文章</div>
         <div class="badge-row">
-          <span class="badge b-blue">一区 TOP 核心成员 × 5</span>
-          <span class="badge b-indigo">三区第一作者 × 2</span>
-          <span class="badge b-violet">三区核心成员 × 2</span>
+          <span class="badge b-blue">流行病学数据库方向</span>
+          <span class="badge b-indigo">基础实验方向</span>
+          <span class="badge b-violet">生物信息学方向</span>
         </div>
       </div>
     </section>
@@ -1837,6 +1991,11 @@
     <img class="modal-content" id="modalImg">
   </div>
 
+  <div id="timeThemeToast" class="time-theme-toast" role="status" aria-live="polite">
+    <div class="time-theme-title" id="timeThemeTitle"></div>
+    <div class="time-theme-body" id="timeThemeBody"></div>
+  </div>
+
   <script>
     /* ===== MODAL ===== */
     function openModal(src) {
@@ -1852,6 +2011,10 @@
       const modal = document.getElementById('imageModal');
       modal.classList.remove('show');
       setTimeout(() => { modal.style.display = "none"; }, 300);
+    }
+
+    function openPdf(fileName) {
+      window.open(encodeURI(fileName), '_blank', 'noopener');
     }
 
     document.addEventListener('keydown', function(event) {
@@ -1887,8 +2050,7 @@
     }
 
     /* ===== THEME TOGGLE ===== */
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
+    autoThemeByTime();
 
     function applyTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
@@ -1903,6 +2065,49 @@
     function toggleTheme() {
       const current = document.documentElement.getAttribute('data-theme');
       applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    function autoThemeByTime() {
+      const now = new Date();
+      const hour = now.getHours();
+      const isDayTime = hour >= 8 && hour < 18;
+
+      if (isDayTime) {
+        applyTheme('light');
+        showTimeThemeToast(
+          '日间模式已启用',
+          `当前时间 ${formatTime(now)}。现在是白天，页面保持明亮主题，祝您工作科研高效顺利。`,
+          false
+        );
+      } else {
+        applyTheme('dark');
+        showTimeThemeToast(
+          '夜间模式已启用',
+          `当前时间 ${formatTime(now)}。晚上了，已自动切换夜间模式，注意休息，保护眼睛。`,
+          true
+        );
+      }
+    }
+
+    function formatTime(dateObj) {
+      return dateObj.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function showTimeThemeToast(title, body, isNight) {
+      const toast = document.getElementById('timeThemeToast');
+      const titleEl = document.getElementById('timeThemeTitle');
+      const bodyEl = document.getElementById('timeThemeBody');
+      if (!toast || !titleEl || !bodyEl) return;
+
+      titleEl.textContent = title;
+      bodyEl.textContent = body;
+      toast.classList.toggle('night', !!isNight);
+
+      toast.classList.add('show');
+      clearTimeout(window.__timeThemeToastTimer);
+      window.__timeThemeToastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 5200);
     }
 
     /* ===== READING PROGRESS BAR ===== */
